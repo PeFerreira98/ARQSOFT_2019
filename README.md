@@ -28,6 +28,18 @@ This README would normally document whatever steps are necessary to get your app
 * Repo owner or admin
 * Other community or team contact
 
-## Deployment Diagram
+---
 
+## Drivers
+
+---
+
+## Use Case Diagram
+![UseCaseDiagram](P1/ADD/img/UseCaseDiagram.png)
+
+---
+
+## Deployment Diagram
 ![DeploymentDiagram](P1/ADD/img/DeploymentDiagram.png)
+
+---

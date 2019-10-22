@@ -1,12 +1,37 @@
-@startuml DeploymentDiagram
+@startuml UseCaseDiagram
 actor Administrator
 actor Staff
 actor Student
 actor Other
 
-usecase UC1
-usecase UC2
-usecase UC3
-usecase UC4
-usecase UC5
+usecase UC1 [
+    UC1 - Add Item to Inventory
+]
+usecase UC2 [ 
+    UC2 - Remove Item from Inventory 
+]
+usecase UC3 [ 
+    UC3 - Add new Meal Descriptor
+]
+usecase UC4 [ 
+    UC4 - Generate management report
+]
+usecase UC5 [ 
+    UC5 - Login
+]
+usecase UC6 [ 
+    UC6 - Logout
+]
+usecase UC7 [
+    UC7 - See Activity Log
+]
+
+Administrator -- UC1
+Administrator -- UC2
+Administrator -- UC3
+Administrator -- UC4
+Administrator -- UC5
+Administrator -- UC6
+Administrator -- UC7
+
 @enduml
