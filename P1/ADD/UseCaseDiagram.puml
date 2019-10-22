@@ -1,0 +1,12 @@
+@startuml DeploymentDiagram
+actor Administrator
+actor Staff
+actor Student
+actor Other
+
+usecase UC1
+usecase UC2
+usecase UC3
+usecase UC4
+usecase UC5
+@enduml

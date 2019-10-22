@@ -1,0 +1,21 @@
+@startuml DeploymentDiagram
+node ClientPC {
+    component GorgeousMealUI
+}
+
+node AppServer {
+    component GorgeousMealAPI
+}
+
+node SchoolUserDatabaseServer {
+    database UserDB
+}
+
+node SchoolDatabaseServer {
+    database MealDB
+}
+
+GorgeousMealUI -(0- GorgeousMealAPI
+GorgeousMealAPI -- UserDB
+GorgeousMealAPI -- MealDB
+@enduml
