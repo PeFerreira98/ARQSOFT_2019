@@ -1,4 +1,6 @@
 @startuml UseCaseDiagram
+left to right direction
+
 actor Administrator
 actor CookingTeam
 actor Student
