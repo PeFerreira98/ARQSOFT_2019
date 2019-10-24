@@ -44,14 +44,14 @@ A, CT, S, O | UC13 - Change App Language. | The users want to use the applicatio
 ---
 
 ## Quality Atributes
-ID | Quality Atribute | Scenario | Associated UC
+ID | Quality Atribute | Scenario | Associated UC | Priority | Dev Difficulty
 --- | --- | --- | ---
-QA-1 | Usability | The system displays a variety of Languages.  | All
-QA-2 | Modifiability | When the generator is edited, the existing components should not be affected. | UC9
-QA-3 | Modifiability | The addiction of a new language should not affect the system (negatively). | All
-QA-4 | Compatibility | Run on several browsers, including mobile. | -
-QA-5 | Usability | The admin requests a report with a different language. | UC13
-QA-6 | Suportability | The system is developed and maintained using Open-Source Technologies without requiring paying licences. | -
+QA-1 | Usability | The system displays a variety of Languages.  | All | Medium | Insignifficant
+QA-2 | Modifiability | When the generator is edited, the existing components should not be affected. | UC9 | High | Medium
+QA-3 | Modifiability | The addiction of a new language should not affect the system (negatively). | All | Low | Insignifficant
+QA-4 | Compatibility | Run on several browsers, including mobile. | - | High | Medium |
+QA-5 | Usability | The admin requests a report with a different language. | UC13 | Medium |
+QA-6 | Suportability | The system is developed and maintained using Open-Source Technologies without requiring paying licences. | - | High | Low
 
 ---
 
