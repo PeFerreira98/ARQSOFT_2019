@@ -25,11 +25,11 @@
 ## UseCase Board
 Actor | Use Case | Description 
 --- | --- | ---
-CT | UC1 - Add Meal Item to Inventory | The cooking team/staff can create a meal. 
+CT | UC1 - Add Meal Item to Inventory | The cooking team/staff can create a meal. On creating the ingredients are associated with the meal.
 CT | UC2 - Remove Meal Item from Inventory | The cooking team/staff can remove a meal. 
-S, O | UC3 - Consult the available meals | Students and Other interested people can consult the available meals. 
+SU | UC3 - Consult the available meals | Students and Other interested people can consult the available meals. 
 CT | UC4 - Consult Inventory Meal Number | Cooking team/staff can consult the inventory of the existing meals. 
-S, O | UC5 - Consult Specific Meal Location. | Students and other starving people can consult the location of their preferred meals. 
+SU | UC5 - Consult Specific Meal Location. | Students and other starving people can consult the location of their preferred meals. 
 CT | UC6 - Add new Meal Descriptor | The staff can create  meal descriptions
 CT | UC7 - Remove Meal Descriptor | The staff can remove  meal descriptions
 CT | UC8 - Generate management report | The staff can request to the system management reports about how many meals and their information.
@@ -37,21 +37,39 @@ CT |UC9 - Update identification number generator. | The staff can update the ide
 CT, A | UC10 - Login | Want to login. 
 CT, A | UC11 - Logout | Want to logout. 
 A | UC12 – See User Activity Log. | The administrator can query the system to consult logs about the activity on the application. 
-A, CT, S, O | UC13 - Change App Language. | The users want to use the application on several languages. 
+A, CT, SU | UC13 - Change App Language. | The users want to use the application on several languages. 
 
-*`Actors`* – Students (S), Cooking Team, Others, Canteen Admin. 
+*`Actors`* – ServiceUsers, Cooking Team, Canteen Admin. 
 
 ---
 
 ## Quality Atributes
 ID | Quality Atribute | Scenario | Associated UC | Priority | Dev Difficulty
 --- | --- | --- | --- | --- | ---
-QA-1 | Usability | The system displays a variety of Languages.  | All | Medium | Insignifficant
+QA-1 | Usability | The system displays a variety of Languages.  | All | Medium | Insignificant
 QA-2 | Modifiability | When the generator is edited, the existing components should not be affected. | UC9 | High | Medium
-QA-3 | Modifiability | The addiction of a new language should not affect the system (negatively). | All | Low | Insignifficant
+QA-3 | Modifiability | The addiction of a new language should not affect the system (negatively). | All | Low | Insignificant
 QA-4 | Compatibility | Run on several browsers, including mobile. | - | High | Medium
 QA-5 | Usability | The admin requests a report with a different language. | UC13 | Medium
-QA-6 | Suportability | The system is developed and maintained using Open-Source Technologies without requiring paying licences. | - | High | Low
+
+---
+
+## Constrains
+ID | Description
+--- | ---
+CT-1 | The system is developed and maintained using Open-Source Technologies without requiring paying licenses.
+CT-2 | The application should be available in two months.
+CT-3 | Within five weeks, adding and removing new items to inventory should be demonstrated.
+CT-4 | The addition of a new descriptor should be completed and tested in less than 0.5 persons day of effort.
+CT-5 | A change in the number identification generator should not take more than 1 person-day of effort.
+
+---
+
+## Achitectural Concerns
+ID | Concerns
+--- | ---
+AC-1 | The application should use the school database server.
+AC-2 | The application should use the school user diretory server.
 
 ---
 
@@ -65,32 +83,3 @@ QA-6 | Suportability | The system is developed and maintained using Open-Source 
 
 ---
 
-# README
-
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
