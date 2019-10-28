@@ -58,4 +58,5 @@ Meal -- AlergicComponent
 Meal -- MealDescriptor
 Meal -- Ingredient
 
+Sale -- Meal
 @enduml
