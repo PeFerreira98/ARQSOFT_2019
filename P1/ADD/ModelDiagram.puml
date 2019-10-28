@@ -1,0 +1,61 @@
+@startuml ModelDiagram
+class Meal {
+    -ID : long
+    -Description : string
+    -MealIdentificationNumber : string
+    -AlergicComponent : List<AlergicComponent>
+    -Ingredient : List<Ingredient>
+    -MealDescriptor : List<MealDescriptor>
+    
+    +bool ChangeMealIdentificationNumberGen()
+
+    +void AddAlergicComponent()
+    +void AddIngredient()
+    +void AddMealDescriptor()
+
+    +void RemoveAlergicComponent()
+    +void RemoveIngredient()
+    +void RemoveMealDescriptor()
+}
+
+class Item {
+    -ID : long
+    -Description : string
+    -ProductionDate : datetime
+    -ExpirationDate : datetime
+    -Meal : Meal
+}
+
+class Ingredient {
+    -ID : long
+    -Description : string
+}
+
+class AlergicComponent {
+    -ID : long
+    -Description : string
+}
+
+class MealDescriptor {
+    -ID : long
+    -Description : string
+}
+
+class Sale {
+    -ID : long
+    -DateSold : datetime
+    -Checkout : bool
+    -PaymentValue : double
+    -SoldMeals : List<Meal>
+
+    +void AddSoldMeal()
+    +void RemoveSoldMeal()
+    +bool Checkout()
+}
+
+Meal -- Item
+Meal -- AlergicComponent
+Meal -- MealDescriptor
+Meal -- Ingredient
+
+@enduml
