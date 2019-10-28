@@ -1,4 +1,4 @@
-@startuml ModelDiagram
+@startuml DomainModelDiagram
 class Meal {
     -ID : long
     -Description : string
@@ -18,7 +18,7 @@ class Meal {
     +void RemoveMealDescriptor()
 }
 
-class Item {
+class MealItem {
     -ID : long
     -Description : string
     -ProductionDate : datetime
@@ -39,6 +39,7 @@ class AlergicComponent {
 class MealDescriptor {
     -ID : long
     -Description : string
+    -Name : string
 }
 
 class Sale {
@@ -46,17 +47,18 @@ class Sale {
     -DateSold : datetime
     -Checkout : bool
     -PaymentValue : double
-    -SoldMeals : List<Meal>
+    -MealItems : List<MealItem>
 
-    +void AddSoldMeal()
-    +void RemoveSoldMeal()
+    +void AddSoldMealItem()
+    +void RemoveSoldMealItem()
     +bool Checkout()
 }
 
-Meal -- Item
-Meal -- AlergicComponent
-Meal -- MealDescriptor
-Meal -- Ingredient
+Meal "0..*" -- "0..*" AlergicComponent
+Meal "1" -- "0..*" MealDescriptor
+Meal "0..*" -- "1..*" Ingredient
 
-Sale -- Meal
+MealItem "0..*" -- "1" Meal
+
+Sale "0..1" -- "1..*" MealItem
 @enduml

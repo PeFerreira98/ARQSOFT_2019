@@ -79,7 +79,7 @@ AC-2 | The application should use the school user diretory server.
 ---
 
 ## Domain Model
-![ModelDiagram](P1/ADD/img/ModelDiagram.png)
+![DomainModelDiagram](P1/ADD/img/DomainModelDiagram.png)
 
 ---
 

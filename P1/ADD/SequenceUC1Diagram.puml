@@ -1,0 +1,13 @@
+@startuml SequenceUC1Diagram
+class Meal 
+
+class Item 
+
+class Ingredient 
+
+class AlergicComponent
+
+class MealDescriptor 
+
+class Sale 
+@enduml

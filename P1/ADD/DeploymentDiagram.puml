@@ -1,4 +1,6 @@
 @startuml DeploymentDiagram
+left to right direction
+
 node ClientPC {
     component GorgeousMealUI
 }
@@ -15,7 +17,7 @@ node SchoolDatabaseServer {
     database MealDB
 }
 
-GorgeousMealUI -(0- GorgeousMealAPI
-GorgeousMealAPI -- UserDB
-GorgeousMealAPI -- MealDB
+GorgeousMealUI -(0- GorgeousMealAPI : HTTPS
+GorgeousMealAPI -- UserDB : TCP
+GorgeousMealAPI -- MealDB : TCP
 @enduml
