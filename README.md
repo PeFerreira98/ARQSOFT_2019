@@ -78,7 +78,7 @@ AC-2 | The application should use the school user diretory server.
 
 ---
 
-## Deployment Diagram
+## System Deployment View
 ![DeploymentDiagram](P1/ADD/img/DeploymentDiagram.png)
 
 ---
