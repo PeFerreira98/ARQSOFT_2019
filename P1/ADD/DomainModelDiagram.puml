@@ -37,19 +37,21 @@ package "Meal Aggregate" #DDDDDD {
     }
 }
 
-class Inventory {
-    -ID : long
-    -MealItems : List<MealItem>
-}
+package "MealItem Aggregate" #DDDDDD {
+    class Inventory {
+        -ID : long
+        -MealItems : List<MealItem>
+    }
 
-class MealItem <<Entity>> {
-    -ID : long
-    -ExternalID : long
-    -Description : string
-    -ProductionDate : datetime
-    -ExpirationDate : datetime
-    -ItemPrice : double
-    -MealID : long
+    class MealItem <<Entity>> {
+        -ID : long
+        -ExternalID : long
+        -Description : string
+        -ProductionDate : datetime
+        -ExpirationDate : datetime
+        -ItemPrice : double
+        -MealID : long
+    }
 }
 
 class Sale <<Entity>> {
