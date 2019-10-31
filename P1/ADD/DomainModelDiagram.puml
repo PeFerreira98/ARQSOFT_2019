@@ -1,57 +1,102 @@
 @startuml DomainModelDiagram
-class Meal {
-    -ID : long
-    -Description : string
-    -MealIdentificationNumber : string
-    -AlergicComponent : List<AlergicComponent>
-    -Ingredient : List<Ingredient>
-    -MealDescriptor : List<MealDescriptor>
-    
-    +bool ChangeMealIdentificationNumberGen()
 
-    +void AddAlergicComponent()
-    +void AddIngredient()
-    +void AddMealDescriptor()
+package "Meal Aggregate" #DDDDDD {
+    class Meal <<Entity>> {
+        -ID : long
+        -Description : string
+        -MealIdentificationNumber : string
+        -AlergicComponent : List<AlergicComponent>
+        -Ingredient : List<Ingredient>
+        -MealDescriptor : List<MealDescriptor>
+        
+        +bool ChangeMealIdentificationNumberGen()
 
-    +void RemoveAlergicComponent()
-    +void RemoveIngredient()
-    +void RemoveMealDescriptor()
+        +void AddAlergicComponent()
+        +void AddIngredient()
+        +void AddMealDescriptor()
+
+        +void RemoveAlergicComponent()
+        +void RemoveIngredient()
+        +void RemoveMealDescriptor()
+    }
+
+    class Ingredient {
+        -ID : long
+        -Description : string
+    }
+
+    class AlergicComponent {
+        -ID : long
+        -Description : string
+    }
+
+    class MealDescriptor {
+        -ID : long
+        -Description : string
+        -Name : string
+    }
 }
 
-class MealItem {
+class Inventory {
     -ID : long
+    -MealItems : List<MealItem>
+}
+
+class MealItem <<Entity>> {
+    -ID : long
+    -ExternalID : long
     -Description : string
     -ProductionDate : datetime
     -ExpirationDate : datetime
-    -Meal : Meal
+    -ItemPrice : double
+    -MealID : long
 }
 
-class Ingredient {
-    -ID : long
-    -Description : string
-}
-
-class AlergicComponent {
-    -ID : long
-    -Description : string
-}
-
-class MealDescriptor {
-    -ID : long
-    -Description : string
-    -Name : string
-}
-
-class Sale {
+class Sale <<Entity>> {
     -ID : long
     -DateSold : datetime
     -Checkout : bool
-    -PaymentValue : double
     -MealItems : List<MealItem>
 
     +void AddSoldMealItem()
     +void RemoveSoldMealItem()
     +bool Checkout()
+}
+
+package "User Aggreate" #DDDDDD {
+    class UserType {
+        -ID : long
+        -Description : string
+    }
+}
+
+package "EventLog Aggregate" #DDDDDD {
+    interface EventLog {
+        -ID : long
+        -Description : string
+        -User : User
+        -Action : EventAction
+        -Class : T
+    }
+
+    class SaleEventLog {
+        -Sale : Sale
+    }
+
+    class MealEventLog {
+        -Meal : Meal
+    }
+
+    class MealItemEventLog {
+        -MealItem : MealItem
+    }
+
+    enum EventAction {
+        - Add
+        - Create
+        - Update
+        - Delete
+    }
 }
 
 Meal "0..*" -- "0..*" AlergicComponent
@@ -61,4 +106,7 @@ Meal "0..*" -- "1..*" Ingredient
 MealItem "0..*" -- "1" Meal
 
 Sale "0..1" -- "1..*" MealItem
+
+Inventory "0..*" -- "0..*" MealItem
+
 @enduml
