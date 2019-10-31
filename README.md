@@ -38,6 +38,8 @@ CT, A | UC10 - Login | Want to login.
 CT, A | UC11 - Logout | Want to logout. 
 A | UC12 – See User Activity Log. | The administrator can query the system to consult logs about the activity on the application. 
 A, CT, SU | UC13 - Change App Language. | The users want to use the application on several languages. 
+CT | UC14 - Add Meal to Inventory | The cooking team/staff can create a meal.
+CT | UC15 - Remove Meal to Inventory | The cooking team/staff can remove a meal from iventory.
 
 *`Actors`* – ServiceUsers, Cooking Team, Canteen Admin. 
 
