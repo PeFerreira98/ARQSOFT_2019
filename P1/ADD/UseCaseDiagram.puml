@@ -3,7 +3,7 @@ left to right direction
 
 actor Administrator
 actor CookingTeam
-actor Student
+actor ServiceUsers
 actor Other
 
 usecase UC1 [
@@ -46,11 +46,11 @@ usecase UC13 [
     UC13 - Change App Language
 ]
 usecase UC14 [
-    UC14 - Add meal to inventory
+    UC14 - Add meal to catalog
 ]
 
 usecase UC15 [
-    UC15 - Remove meal to iventory
+    UC15 - Remove meal to catalog
 ]
 
 
@@ -58,12 +58,12 @@ CookingTeam -- UC1
 
 CookingTeam -- UC2
 
-Student -- UC3
+ServiceUsers -- UC3
 Other -- UC3
 
 CookingTeam -- UC4
 
-Student -- UC5
+ServiceUsers -- UC5
 Other -- UC5
 
 CookingTeam -- UC6
@@ -88,6 +88,6 @@ Administrator -- UC12
 
 Administrator -- UC13
 CookingTeam -- UC13
-Student -- UC13
+ServiceUsers -- UC13
 Other -- UC13
 @enduml

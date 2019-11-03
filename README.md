@@ -1,4 +1,5 @@
 # Gorgeous Food App #
+Gorgeous Food Application development is supported by the Attribute-Driven Design (ADD) methodology.
 
 ## Iteration 1
 
