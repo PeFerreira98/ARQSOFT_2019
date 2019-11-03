@@ -1,0 +1,30 @@
+@startuml
+
+left to right direction
+
+package "GorgeousFoodAPI"{
+    [Controller] -up- API_REST
+    [Service] -- ServiceData
+    [Entity] -up- EntityData
+    [Repository] -left- RepoData
+    
+    Service --(RepoData
+    Controller --(ServiceData
+    Service --(EntityData
+    Entity --(RepoData
+    
+    Repository --UserDB :TCP
+    Repository --MealDB :TCP
+}
+
+package "ClientPC"{
+    [GorgeousFoodUI] --(API_REST
+}
+
+database "UserDB"{
+}
+
+database "MealDB"{
+}
+
+@enduml

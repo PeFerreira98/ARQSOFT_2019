@@ -1,5 +1,17 @@
 # Gorgeous Food App #
 
+## Iteration 1
+
+*Goal:*
+
+## Iteration 2
+
+*Goal:*
+
+## Iteration 3
+
+*Goal:*
+
 ## Drivers
 1. > The application to be developed must be accessible from a variety of platforms using a web browser.
 
@@ -86,4 +98,4 @@ AC-2 | The application should use the school user diretory server.
 ---
 
 ## System Deployment View
-![DeploymentDiagram](P1/ADD/img/DeploymentDiagram.png)
+![DeploymentDiagram](P1/ADD/img/APILayersDiagram.png)
