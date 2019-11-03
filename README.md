@@ -76,6 +76,7 @@ CT-2 | The application should be available in two months.
 CT-3 | Within five weeks, adding and removing new items to inventory should be demonstrated.
 CT-4 | The addition of a new descriptor should be completed and tested in less than 0.5 persons day of effort.
 CT-5 | A change in the number identification generator should not take more than 1 person-day of effort.
+CT-6 | The application must be accessible from several browser (ex: Chrome, Firefox) in different platforms (ex: Windows, Linux, OSX).
 
 ---
 
@@ -83,7 +84,8 @@ CT-5 | A change in the number identification generator should not take more than
 ID | Concerns
 --- | ---
 AC-1 | The application should use the school database server.
-AC-2 | The application should use the school user diretory server.
+AC-2 | The application should use the school user directory server.
+AC-3 |  Take advantage of the team's technical knowledge of C# programming language.
 
 ---
 
@@ -98,4 +100,9 @@ AC-2 | The application should use the school user diretory server.
 ---
 
 ## System Deployment View
-![DeploymentDiagram](P1/ADD/img/APILayersDiagram.png)
+![DeploymentDiagram](P1/ADD/img/DeploymentDiagram.png)
+
+---
+
+## Logical View of Server Components
+![APILayersDiagram](P1/ADD/img/APILayersDiagram.png)
