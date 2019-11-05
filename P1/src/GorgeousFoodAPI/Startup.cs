@@ -28,6 +28,7 @@ namespace GorgeousFoodAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseDefaultFiles();
