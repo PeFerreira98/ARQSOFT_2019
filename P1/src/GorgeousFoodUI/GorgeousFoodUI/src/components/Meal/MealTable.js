@@ -9,6 +9,32 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 
 export class MealTable extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            meals: [],
+            errorText: ''
+        }
+    }
+
+    fetchMeals = () => {
+        axios.get('https://gorgeousfoodapi.azurewebsites.net/api/meal').then((response) => {
+            this.setState({
+                meals: response.data
+            });
+        }).catch((serverError) => {
+            this.setState({
+                errorText: serverError
+            });
+            console.log(this.state.errorText);
+        });
+    };
+
+    componentDidMount() {
+        this.fetchMeals();
+    }
+
     render() {
         return(
             <div className="MealComponent">
@@ -19,6 +45,12 @@ export class MealTable extends Component{
                         <TableCell align="center">Description</TableCell>
                     </TableRow>
                     <TableBody>
+                        {this.state.meals.map(row =>(
+                            <TableRow key={row.mealID}>
+                                <TableCell align="center" component="th" scope="row">{row.mealID}</TableCell>
+                                <TableCell align="center">{row.description}</TableCell>
+                            </TableRow>
+                        ))}
 
                     </TableBody>
                 </Table>
