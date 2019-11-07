@@ -1,18 +1,6 @@
 # Gorgeous Food App #
 Gorgeous Food Application development is supported by the Attribute-Driven Design (ADD) methodology.
 
-## Iteration 1
-
-*Goal:*
-
-## Iteration 2
-
-*Goal:*
-
-## Iteration 3
-
-*Goal:*
-
 ## Drivers
 1. > The application to be developed must be accessible from a variety of platforms using a web browser.
 
@@ -61,11 +49,12 @@ CT | UC15 - Remove Meal | The cooking team/staff can remove a meal.
 ## Quality Atributes
 ID | Quality Atribute | Scenario | Associated UC | Priority | Dev Difficulty
 --- | --- | --- | --- | --- | ---
-QA-1 | Usability | The system displays a variety of Languages.  | All | Medium | Insignificant
+QA-1 | Usability | The system displays a variety of Languages.  | All | Medium | Low
 QA-2 | Modifiability | When the generator is edited, the existing components should not be affected. | UC9 | High | Medium
-QA-3 | Modifiability | The addiction of a new language should not affect the system (negatively). | All | Low | Insignificant
-QA-4 | Compatibility | Run on several browsers, including mobile. | - | High | Medium
-QA-5 | Usability | The admin requests a report with a different language. | UC13 | Medium
+QA-3 | Modifiability | The addiction of a new language should not affect the system (negatively). | All | Medium | Low
+QA-4 | Compatibility | Run on several browsers, on several devices. | - | High | Medium
+QA-5 | Usability | The admin requests a report with a different language. | UC13 | High | Medium
+QA-6 | Modifiability | A new meal descriptor is added or removed and other components of the application are not affected. | UC6 and UC7 | Medium | High
 
 ---
 
@@ -95,10 +84,11 @@ AC-3 | Take advantage of the team's technical knowledge of C# programming langua
 
 ---
 
-## Domain Model
-![DomainModelDiagram](P1/ADD/img/DomainModelDiagram.png)
+## Iteration 1
 
----
+In this iteration, the objective is to create a structure for the system considering that it is a Greenfield type of system.
+Although the inputs have different priorities, in this iteration, all inputs are considered in order to produce an overall system structure.
+A reference architecture is chosen as well as a deployment pattern.
 
 ## System Deployment View
 ![DeploymentDiagram](P1/ADD/img/DeploymentDiagram.png)
@@ -107,3 +97,60 @@ AC-3 | Take advantage of the team's technical knowledge of C# programming langua
 
 ## Logical View of Server Components
 ![APILayersDiagram](P1/ADD/img/APILayersDiagram.png)
+
+## Kanban Board
+Task | Not Addressed | Partially addressed | Addressed 
+--- | --- | --- | ---
+Structure the system | | X 
+QA-4 | X | 
+CT-1 | X | 
+CT-6 | X | 
+AC-1 | | X 
+AC-2 | | X 
+AC-3 | | X 
+
+---
+
+## Iteration 2
+In this iteration, we focus on the primary functionalities and chose the Domain-Driven Design pattern to guide the software architecture required for the system.
+As inputs we choose the use cases UC1, UC2, UC14 and UC15. For this iteration we decided to decompose the several tiers already defined in iteration 1.
+
+## Domain Model
+![DomainModelDiagram](P1/ADD/img/DomainModelDiagram.png)
+
+---
+
+## Technologies
+Component | Technologies Analyzed  | Decision | Reason 
+--- | --- | --- | ---
+Programming language | Java, C#, PHP | C# | The team is more familiarized with C# programming language AC-3
+Framework for development | ASP.NET WEB API, ASP.NET MVC, SignalR, Yii, Zend | ASP.NET Core | AC-3
+
+---
+
+## Kanban Board
+
+Task | Not Addressed | Partially addressed | Addressed 
+--- | --- | --- | ---
+AC-3 | | |X
+UC1 | | X |
+UC2 | | X |
+
+---
+
+## Iteration 3
+
+## Kanban Board
+Task | Not Addressed | Partially addressed | Addressed 
+--- | --- | --- | ---
+
+---
+
+## Iteration 4
+Refine the add and remove meals/items from iventory functionalities.
+
+## Kanban Board
+Task | Not Addressed | Partially addressed | Addressed 
+--- | --- | --- | ---
+
+---
