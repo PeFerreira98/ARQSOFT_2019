@@ -1,23 +1,26 @@
 @startuml DeploymentDiagram
 left to right direction
 
-node ClientPC {
-    component GorgeousMealUI
-}
+node MicrosoftAzure{
+    node AppService1 {
+        component GorgeousMealUI
+    }
 
-node AppServer {
-    component GorgeousMealAPI
+    node AppService2 {
+        component GorgeousMealAPI
+    }
+
+    node DatabaseServer {
+        database MealDB
+    }
 }
 
 node SchoolUserDatabaseServer {
     database UserDB
 }
 
-node SchoolDatabaseServer {
-    database MealDB
-}
-
 GorgeousMealUI -(0- GorgeousMealAPI : HTTPS
 GorgeousMealAPI -- UserDB : TCP
 GorgeousMealAPI -- MealDB : TCP
+
 @enduml

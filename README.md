@@ -46,7 +46,7 @@ SU | UC5 - Consult Specific Meal Location. | Students and other starving people 
 CT | UC6 - Add new Meal Descriptor | The staff can create  meal descriptions
 CT | UC7 - Remove Meal Descriptor | The staff can remove  meal descriptions
 CT | UC8 - Generate management report | The staff can request to the system management reports about how many meals and their information.
-CT |UC9 - Update identification number generator. | The staff can update the identification generator, so that the number generator meats the specified characteristics.  
+CT |UC9 - Update identification number generator. | The staff can update the identification generator, so that the number generator meets the specified characteristics.  
 CT, CA | UC10 - Login | Want to login. 
 CT, CA | UC11 - Logout | Want to logout. 
 CA | UC12 – See User Activity Log. | The administrator can query the system to consult logs about the activity on the application. 
@@ -86,7 +86,7 @@ ID | Concerns
 --- | ---
 AC-1 | The application should use the school database server.
 AC-2 | The application should use the school user directory server.
-AC-3 |  Take advantage of the team's technical knowledge of C# programming language.
+AC-3 | Take advantage of the team's technical knowledge of C# programming language.
 
 ---
 
