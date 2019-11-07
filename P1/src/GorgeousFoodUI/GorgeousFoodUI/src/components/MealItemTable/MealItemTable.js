@@ -25,6 +25,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -46,7 +52,6 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-
 export class MealItemTable extends Component {
 
     constructor(props) {
@@ -54,6 +59,7 @@ export class MealItemTable extends Component {
         this.state = {
             mealItens: [],
             createMealItemDialog: false,
+            selectedDate: '01/01/2019',
             errorText: ''
         };
         this.handleOpenCreateMealItemDialog = this.handleOpenCreateMealItemDialog.bind(this);
@@ -108,14 +114,20 @@ export class MealItemTable extends Component {
     }
 
 
+    handleDateChange = (date) => {
+        this.setState({
+            selectedDate: date
+        });
+    };
+
     render() {
 
-             let columns= [
-                 {title: 'Meal Item ID', field: 'mealItemID'},
-                 {title: 'Production Date', field: 'productionDate', type: 'datetime'},
-                 {title: 'Expiration Date', field: 'expirationDate', type: 'datetime' },
-                 {title: 'Meal ID', field: 'meal.mealID'},
-                 {title: 'Meal Description', field: 'meal.description'}];
+         let columns= [
+              {title: 'Production Date', field: 'productionDate', type: 'datetime'},
+              {title: 'Expiration Date', field: 'expirationDate', type: 'datetime' },
+              {title: 'Meal Description', field: 'meal.description'}];
+
+
 
         return(
 
@@ -129,27 +141,33 @@ export class MealItemTable extends Component {
                         startIcon={<AddBox/>}>
                         Add Meal Item
                     </Button>
-                    <Dialog open={this.state.createMealItemDialog} onClose={this.handleOpenCloseMealItemDialog} aria-labelledby="form-dialog-title">
+                    <Dialog open={this.state.createMealItemDialog} onClose={this.handleOpenCloseMealItemDialog} aria-labelledby="form-dialog-title"
+                    className="">
                         <DialogTitle id="form-dialog-title">Create Meal Item</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 To create a Meal Item, please fill in the following fields.
                             </DialogContentText>
-                            <TextField
-                                id="datetime-local"
-                                label="Expiration Date"
-                                type="datetime-local"
-                                color="primary"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        margin="normal"
+                                        id="date-picker-dialog"
+                                        label="Date picker dialog"
+                                        format="dd/MM/yyyy"
+                                        value={this.state.selectedDate}
+                                        onChange={this.handleDateChange}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                                    />
+                            </MuiPickersUtilsProvider>
+
+
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleOpenCloseMealItemDialog} color="primary">
                                 Cancel
                             </Button>
-                            /*fazer handle para o pedido post*/
                             <Button onClick={this.handleOpenCloseMealItemDialog} color="primary">
                                 Create
                             </Button>

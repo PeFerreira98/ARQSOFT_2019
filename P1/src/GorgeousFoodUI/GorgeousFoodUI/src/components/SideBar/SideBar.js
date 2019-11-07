@@ -44,9 +44,9 @@ export class SideBar extends Component {
 
     render() {
         let menu = null;
-        if(this.state.selectedInvetories){
+        /*if(this.state.selectedInvetories){
             menu = <InventoryTable/>
-        }
+        }*/
         if(this.state.selectedMealItens){
             menu = <MealItemTable/>
         }
@@ -58,10 +58,10 @@ export class SideBar extends Component {
         return(
             <div className="LeftBox">
                 <div className="SideBar">
-                    <li className={this.state.selectedInvetories ? "ButtonBoxActive" : "ButtonBox"}
+                    {/*<li className={this.state.selectedInvetories ? "ButtonBoxActive" : "ButtonBox"}
                         onClick={this.handleInvetoriesOption}>
                         <div className="TextOptions">Inventories</div>
-                    </li>
+                    </li>*/}
 
                     <li className={this.state.selectedMealItens ? "ButtonBoxActive" : "ButtonBox"}
                         onClick={this.handleMealItensOption}>

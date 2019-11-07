@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorgeousFoodAPI", "GorgeousFoodAPI.csproj", "{78713BCE-1FE2-485E-834B-333CA68A65E6}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "GorgeousFoodAPI", "GorgeousFoodAPI.csproj", "{BDA767C2-997A-42A2-925C-7AE98AA9A387}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{78713BCE-1FE2-485E-834B-333CA68A65E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78713BCE-1FE2-485E-834B-333CA68A65E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78713BCE-1FE2-485E-834B-333CA68A65E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78713BCE-1FE2-485E-834B-333CA68A65E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA767C2-997A-42A2-925C-7AE98AA9A387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA767C2-997A-42A2-925C-7AE98AA9A387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA767C2-997A-42A2-925C-7AE98AA9A387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA767C2-997A-42A2-925C-7AE98AA9A387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
