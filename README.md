@@ -132,25 +132,22 @@ Framework for development | ASP.NET WEB API, ASP.NET MVC, SignalR, Yii, Zend | A
 
 Task | Not Addressed | Partially addressed | Addressed 
 --- | --- | --- | ---
-AC-3 | | |X
-UC1 | | X |
-UC2 | | X |
+AC-3 | | | X
+UC1 | | X |  
+UC2 | | X | 
 
 ---
 
 ## Iteration 3
 
-## Kanban Board
-Task | Not Addressed | Partially addressed | Addressed 
---- | --- | --- | ---
+The objective of this iteration is to address the quality atribute QA-4 and refine the architecture for the UC-1, UC-2, UC-3 implementation.
 
----
-
-## Iteration 4
-Refine the add and remove meals/items from iventory functionalities.
 
 ## Kanban Board
 Task | Not Addressed | Partially addressed | Addressed 
 --- | --- | --- | ---
+UC-1 | | | X
+UC-2 | | | X
+UC-3 | | | X
 
 ---
