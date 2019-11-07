@@ -1,30 +1,32 @@
-@startuml
-
+@startuml APILayersDiagram
 left to right direction
 
 package "GorgeousFoodAPI"{
-    [Controller] -up- API_REST
+    [Controller] -up- API_Endpoint
     [Service] -- ServiceData
     [Entity] -up- EntityData
     [Repository] -left- RepoData
-    
+
     Service --(RepoData
     Controller --(ServiceData
     Service --(EntityData
     Entity --(RepoData
-    
+
     Repository --UserDB :TCP
     Repository --MealDB :TCP
 }
 
 package "ClientPC"{
-    [GorgeousFoodUI] --(API_REST
+    [GorgeousFoodUI] --(API_Endpoint
 }
 
-database "UserDB"{
+package "DBServer"{
+    database "UserDB"{
+    }
 }
-
-database "MealDB"{
+package "DBServer2"{
+    database "MealDB"{
+    }
 }
 
 @enduml
