@@ -1,5 +1,5 @@
 ﻿using GorgeousFoodAPI.Infrastructure;
-using GorgeousFoodAPI.Models;
+using GorgeousFoodAPI.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace GorgeousFoodAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<GorgeousFoodMealContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MealDatabaseAzure")));
-        
+
             services.AddTransient<IMealRepository, MealRepository>();
             services.AddTransient<IMealItemRepository, MealItemRepository>();
         }

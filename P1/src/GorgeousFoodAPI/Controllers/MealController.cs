@@ -1,9 +1,8 @@
-﻿using GorgeousFoodAPI.Infrastructure;
+﻿using GorgeousFoodAPI.Infrastructure.Repositories;
 using GorgeousFoodAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GorgeousFoodAPI.Controllers
@@ -12,37 +11,25 @@ namespace GorgeousFoodAPI.Controllers
     [ApiController]
     public class MealController : ControllerBase
     {
-        private readonly GorgeousFoodMealContext _context;
+        private readonly IMealRepository _mealRepository;
 
-        public MealController(GorgeousFoodMealContext context)
-        {
-            _context = context;
-        }
+        public MealController(IMealRepository mealRepository) => _mealRepository = mealRepository;
+
 
         // GET: api/Meal
         [HttpGet]
-        public IEnumerable<Meal> GetMeal()
-        {
-            return _context.Meal;
-        }
+        public IEnumerable<Meal> GetMeal() => _mealRepository.GetAllMeal();
 
         // GET: api/Meal/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetMeal([FromRoute] long id)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            Meal meal = await _context.Meal.FindAsync(id);
+            Meal meal = await _mealRepository.GetMealByIDAsync(id);
 
-            if (meal == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(meal);
+            return meal == null ? NotFound() : (IActionResult)Ok(meal);
         }
 
         // PUT: api/Meal/5
@@ -50,31 +37,21 @@ namespace GorgeousFoodAPI.Controllers
         public async Task<IActionResult> PutMeal([FromRoute] long id, [FromBody] Meal meal)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             if (id != meal.MealID)
-            {
                 return BadRequest();
-            }
-
-            _context.Entry(meal).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _mealRepository.EditMealAsync(meal);
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!MealExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
@@ -85,12 +62,9 @@ namespace GorgeousFoodAPI.Controllers
         public async Task<IActionResult> PostMeal([FromBody] Meal meal)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            _context.Meal.Add(meal);
-            await _context.SaveChangesAsync();
+            await _mealRepository.AddMealAsync(meal);
 
             return CreatedAtAction("GetMeal", new { id = meal.MealID }, meal);
         }
@@ -100,25 +74,18 @@ namespace GorgeousFoodAPI.Controllers
         public async Task<IActionResult> DeleteMeal([FromRoute] long id)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            Meal meal = await _context.Meal.FindAsync(id);
+            Meal meal = await _mealRepository.GetMealByIDAsync(id);
+
             if (meal == null)
-            {
                 return NotFound();
-            }
 
-            _context.Meal.Remove(meal);
-            await _context.SaveChangesAsync();
+            await _mealRepository.DeleteMealAsync(meal);
 
             return Ok(meal);
         }
 
-        private bool MealExists(long id)
-        {
-            return _context.Meal.Any(e => e.MealID == id);
-        }
+        private bool MealExists(long id) => _mealRepository.MealExists(id);
     }
 }
