@@ -124,7 +124,8 @@ As inputs we choose the use cases UC1, UC2, UC14 and UC15. For this iteration we
 Component | Technologies Analyzed  | Decision | Reason 
 --- | --- | --- | ---
 Programming language | Java, C#, PHP | C# | The team is more familiarized with C# programming language AC-3
-Framework for development | ASP.NET WEB API, ASP.NET MVC, SignalR, Yii, Zend | ASP.NET Core | AC-3
+Framework for development | ASP.NET API, ASP.NET MVC, ASp.NET Core, SignalR, Yii, Zend | ASP.NET Core | AC-3
+Database | | | 
 
 ---
 
@@ -141,6 +142,9 @@ UC2 | | X |
 ## Iteration 3
 
 The objective of this iteration is to address the quality atribute QA-4 and refine the architecture for the UC-1, UC-2, UC-3 implementation.
+
+## Sequence Diagrams
+
 
 
 ## Kanban Board
