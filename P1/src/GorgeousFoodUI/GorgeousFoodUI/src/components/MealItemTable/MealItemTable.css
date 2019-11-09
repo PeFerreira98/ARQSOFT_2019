@@ -13,12 +13,10 @@
     height: 40px;
 }
 
-.Dialog{
+.fieldsBox{
     display: flex;
+    flex-direction: column;
 }
-
-
-
 
 
 

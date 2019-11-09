@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SideBar.css';
 import MealItemTable from "../MealItemTable/MealItemTable";
-import InventoryTable from "../IventoryTable/InventoryTable";
+//import InventoryTable from "../IventoryTable/InventoryTable";
 import MealTable from "../Meal/MealTable";
 
 export class SideBar extends Component {
@@ -65,7 +65,7 @@ export class SideBar extends Component {
 
                     <li className={this.state.selectedMealItens ? "ButtonBoxActive" : "ButtonBox"}
                         onClick={this.handleMealItensOption}>
-                        <div className="TextOptions">Meal Itens</div>
+                        <div className="TextOptions">Inventory</div>
                     </li>
 
                     <li className={this.state.selectedMeals ? "ButtonBoxActive" : "ButtonBox"}

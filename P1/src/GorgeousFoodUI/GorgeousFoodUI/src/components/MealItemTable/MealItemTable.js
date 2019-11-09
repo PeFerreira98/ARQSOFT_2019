@@ -19,18 +19,17 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import Button from "@material-ui/core/Button";
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-
+import {MuiPickersUtilsProvider, KeyboardDatePicker,} from '@material-ui/pickers';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -57,13 +56,19 @@ export class MealItemTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            meals: [],
             mealItens: [],
+            selectedMeal: '',
             createMealItemDialog: false,
             selectedDate: '01/01/2019',
             errorText: ''
         };
         this.handleOpenCreateMealItemDialog = this.handleOpenCreateMealItemDialog.bind(this);
-        this.handleOpenCloseMealItemDialog = this.handleOpenCloseMealItemDialog.bind(this);
+        this.handleCloseMealItemDialog = this.handleCloseMealItemDialog.bind(this);
+        this.handleMealChange = this.handleMealChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+
+
     }
 
     handleOpenCreateMealItemDialog(){
@@ -71,16 +76,13 @@ export class MealItemTable extends Component {
             createMealItemDialog: true
         })
     }
-
-    handleOpenCloseMealItemDialog(){
+    
+    handleCloseMealItemDialog(){
         this.setState({
-            createMealItemDialog: false
+            createMealItemDialog: false,
+            selectedMeal: ''
         })
     }
-
-    handleCreateMealItem(){
-
-    };
 
     deleteMealItens = (mealItemID) => {
         axios.delete('https://gorgeousfoodapi.azurewebsites.net/api/mealitem/' + mealItemID).then(() => {
@@ -109,10 +111,38 @@ export class MealItemTable extends Component {
         });
     };
 
-    componentDidMount() {
-        this.fetchMealItens();
-    }
+    fetchMeals = () => {
+        axios.get('https://gorgeousfoodapi.azurewebsites.net/api/meal').then((response) => {
+            console.log(response);
+            this.setState({
+                meals: response.data
+            });
+        }).catch((serverError) => {
+            this.setState({
+                errorText: serverError
+            });
+            console.log(this.state.errorText);
+        });
+    };
 
+    createMealItem = () => {
+        let newMealItem = {
+            expirationDate: this.state.selectedDate,
+            mealID: this.state.selectedMeal,
+        };
+        console.log(JSON.stringify(newMealItem));
+
+        axios.post('https://gorgeousfoodapi.azurewebsites.net/api/mealitem', newMealItem).then(() =>{
+           this.handleCloseMealItemDialog();
+           this.fetchMealItens();
+        }).catch((serverError) => {
+            console.log((serverError));
+            this.setState({
+                createMealItemDialog: false,
+                selectedDate: '01/01/2019',
+                selectedMeal: {mealID: ''}});
+        });
+    };
 
     handleDateChange = (date) => {
         this.setState({
@@ -120,17 +150,30 @@ export class MealItemTable extends Component {
         });
     };
 
+    handleMealChange = (meal) => {
+        this.setState({
+            selectedMeal: meal.target.value
+        });
+    };
+
+    componentDidMount() {
+        this.fetchMealItens();
+        this.fetchMeals();
+    }
+
     render() {
 
-         let columns= [
-              {title: 'Production Date', field: 'productionDate', type: 'datetime'},
+        let columns= [
+             {title: 'Meal Identification Number', field: 'mealIdentificationNumber'},
+             {title: 'Meal Description', field: 'meal.description'},
+             {title: 'Production Date', field: 'productionDate', type: 'datetime'},
               {title: 'Expiration Date', field: 'expirationDate', type: 'datetime' },
-              {title: 'Meal Description', field: 'meal.description'}];
+             ];
 
-
+        let mealoptions = this.state.meals.map(opt =>
+            (<MenuItem key={opt.mealID} value={opt.mealID}>{opt.description}</MenuItem>));
 
         return(
-
             <div className="ItemMealComponent">
                 <grid>
                     <Button
@@ -141,18 +184,33 @@ export class MealItemTable extends Component {
                         startIcon={<AddBox/>}>
                         Add Meal Item
                     </Button>
-                    <Dialog open={this.state.createMealItemDialog} onClose={this.handleOpenCloseMealItemDialog} aria-labelledby="form-dialog-title"
-                    className="">
-                        <DialogTitle id="form-dialog-title">Create Meal Item</DialogTitle>
+
+                    <Dialog open={this.state.createMealItemDialog} onClose={this.handleCloseMealItemDialog} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Add Meal Item to Inventory</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                To create a Meal Item, please fill in the following fields.
+                                To add a Meal Item to Inventory, please fill in the following fields.
                             </DialogContentText>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+
+                            <div className="fieldsBox">
+
+                                <FormControl>
+                                    <InputLabel id="demo-controlled-open-select-label">Meal</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        onChange={this.handleMealChange}
+                                        value={this.state.selectedMeal}
+                                    >
+                                        {mealoptions}
+                                    </Select>
+                                </FormControl>
+
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
                                         margin="normal"
                                         id="date-picker-dialog"
-                                        label="Date picker dialog"
+                                        label="Expiration Date"
                                         format="dd/MM/yyyy"
                                         value={this.state.selectedDate}
                                         onChange={this.handleDateChange}
@@ -161,14 +219,15 @@ export class MealItemTable extends Component {
                                         }}
                                     />
                             </MuiPickersUtilsProvider>
+                            </div>
 
 
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleOpenCloseMealItemDialog} color="primary">
+                            <Button onClick={this.handleCloseMealItemDialog} color="primary">
                                 Cancel
                             </Button>
-                            <Button onClick={this.handleOpenCloseMealItemDialog} color="primary">
+                            <Button onClick={this.createMealItem} color="primary">
                                 Create
                             </Button>
                         </DialogActions>
@@ -176,7 +235,7 @@ export class MealItemTable extends Component {
                 </grid>
 
                 <MaterialTable
-                    title="Meal Itens"
+                    title="Meal Itens Inventory"
                     columns={columns}
                     icons={tableIcons}
                     options={{
