@@ -16,11 +16,11 @@ A reference architecture is chosen as well as a deployment pattern.
 Task | Not Addressed | Partially addressed | Addressed
 --- | --- | --- | ---
 Structure the system | | X
-QA-4 | X |
-CT-1 | X |
-CT-6 | X |
-AC-1 | | X
-AC-2 | | X
-AC-3 | | X
+QA-4 | | X | 
+CT-1 | | X | 
+CT-6 | | X |
+AC-1 | | | X
+AC-2 | | | X
+AC-3 | | | X
 
 ---
