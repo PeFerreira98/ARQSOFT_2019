@@ -3,7 +3,7 @@ In this iteration, we focus on the primary functionalities and chose the Domain-
 As inputs we choose the use cases UC1, UC2, UC14 and UC15. For this iteration we decided to decompose the several tiers already defined in iteration 1.
 
 ## Domain Model
-![DomainModelDiagram](P1/ADD/views/img/DomainModelDiagram.png)
+![DomainModelDiagram](../views/img/DomainModelDiagram.png)
 
 ---
 

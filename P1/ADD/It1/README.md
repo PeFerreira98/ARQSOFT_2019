@@ -5,12 +5,12 @@ Although the inputs have different priorities, in this iteration, all inputs are
 A reference architecture is chosen as well as a deployment pattern.
 
 ## System Deployment View
-![DeploymentDiagram](P1/ADD/views/img/DeploymentDiagram.png)
+![DeploymentDiagram](../views/img/DeploymentDiagram.png)
 
 ---
 
 ## Logical View of Server Components
-![APILayersDiagram](P1/ADD/views/img/APILayersDiagram.png)
+![APILayersDiagram](../views/img/APILayersDiagram.png)
 
 ## Kanban Board
 Task | Not Addressed | Partially addressed | Addressed
