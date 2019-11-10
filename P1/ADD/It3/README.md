@@ -3,7 +3,7 @@ The objective of this iteration is to address the quality atribute QA-4 and refi
 
 ## Sequence Diagrams
 
-
+![SequenceDiagram](../views/img/SequenceUC1Diagram.png)
 
 ## Kanban Board
 Task | Not Addressed | Partially addressed | Addressed

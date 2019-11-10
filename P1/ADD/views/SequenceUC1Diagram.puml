@@ -1,13 +1,26 @@
 @startuml SequenceUC1Diagram
-class Meal 
+actor CookingTeam
+boundary GorgeousMealUI
+control MealItemController
+participant MealItemRepository
+entity MealItem
+database MealDB
 
-class Item 
+CookingTeam -> GorgeousMealUI : Select Add Meal Item
+GorgeousMealUI --> CookingTeam : Meal Item Data?
+CookingTeam -> GorgeousMealUI : Inserts Meal Item Data
 
-class Ingredient 
+GorgeousMealUI-> MealItemController : AddMealItem(data)
+MealItemController -> MealItemController : ValidateData(data)
 
-class AlergicComponent
+MealItemController -> MealItemRepository : PostMealItem(data)
+MealItemRepository -> MealItemRepository : ValidateData(data)
 
-class MealDescriptor 
+MealItemRepository -> MealItem : new MealItem(data)
+MealItem --> MealItemRepository : return mealItem
+MealItemRepository -> MealDB : AddMealItem(mealItem)
 
-class Sale 
+MealItemRepository --> MealItemController : return success
+MealItemController --> GorgeousMealUI : return success
+GorgeousMealUI --> CookingTeam : Informs the operation's success
 @enduml
