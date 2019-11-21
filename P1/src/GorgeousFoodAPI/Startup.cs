@@ -32,7 +32,12 @@ namespace GorgeousFoodAPI
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
-            app.UseCors();
+            app.UseCors(option => {
+                option.AllowAnyOrigin();
+                option.AllowAnyMethod();
+                option.AllowAnyHeader();
+                option.WithMethods("GET", "POST", "PUT", "DELETE");
+            });
             app.UseHttpsRedirection();
             app.UseMvc();
             app.UseDefaultFiles();

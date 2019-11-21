@@ -13,6 +13,7 @@ namespace GorgeousFoodAPI.Infrastructure.Repositories
         Task AddMealItemAsync(MealItem mealItem);
         Task DeleteMealItemAsync(MealItem mealItem);
         Task DisableMealItemAsync(long id);
+        Task DisableMealItemAsync(MealItem mealItem);
 
         bool MealItemExists(long id);
     }

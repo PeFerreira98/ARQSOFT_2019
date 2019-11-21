@@ -80,7 +80,24 @@ namespace GorgeousFoodAPI.Controllers
             if (mealItem == null)
                 return NotFound();
 
-            await _mealItemRepository.DeleteMealItemAsync(mealItem);
+            await _mealItemRepository.DisableMealItemAsync(mealItem);
+
+            return Ok(mealItem);
+        }
+
+        // POST: api/MealItem/5
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteMealItem2([FromRoute] long id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            MealItem mealItem = await _mealItemRepository.GetMealItemByIDAsync(id);
+
+            if (mealItem == null)
+                return NotFound();
+
+            await _mealItemRepository.DisableMealItemAsync(mealItem);
 
             return Ok(mealItem);
         }

@@ -16,7 +16,7 @@ namespace GorgeousFoodAPI.Infrastructure.Repositories
 
         public IEnumerable<MealItem> GetAllMealItem() => _context.MealItem;
 
-        public IEnumerable<MealItem> GetAllAvailableMealItem() => _context.MealItem.Where(x => x.AvailableStatus);
+        public IEnumerable<MealItem> GetAllAvailableMealItem() => _context.MealItem.Include(x => x.Meal).Where(x => x.AvailableStatus);
 
         public async Task<MealItem> GetMealItemByIDAsync(long id) => await _context.MealItem.FindAsync(id);
 
@@ -54,6 +54,12 @@ namespace GorgeousFoodAPI.Infrastructure.Repositories
             if (mealItem == null)
                 return;
 
+            mealItem.DisableMealItem();
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DisableMealItemAsync(MealItem mealItem)
+        {
             mealItem.DisableMealItem();
             await _context.SaveChangesAsync();
         }
