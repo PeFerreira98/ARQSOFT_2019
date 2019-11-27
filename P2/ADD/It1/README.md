@@ -83,6 +83,7 @@ Artifacts | Identification of the Artifacts involved in the capability.
 
 ---
 
+ | 
 --- | ---
 ID | C1
 Type | Inventory Management
@@ -93,6 +94,7 @@ Artifacts | UC1-4, P2D4
 
 ---
 
+ | 
 --- | ---
 ID | C2
 Type | Meal Management
@@ -103,6 +105,7 @@ Artifacts | P2D2, P2D5
 
 ---
 
+ | 
 --- | ---
 ID | C3
 Type | Descriptor Creation
@@ -113,6 +116,7 @@ Artifacts | UC6-7, UC9
 
 ---
 
+ | 
 --- | ---
 ID | C4
 Type | Report Generation
@@ -123,6 +127,7 @@ Artifacts | UC8, UC12
 
 ---
 
+ | 
 --- | ---
 ID | C5
 Type | POS Location
