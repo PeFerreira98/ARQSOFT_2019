@@ -1,0 +1,133 @@
+{
+  "name": "GorgeusFood",
+  "entities": [
+    {
+      "name": "Inventory",
+      "nanoentities": [
+        "id",
+        "description"
+      ]
+    },
+    {
+      "name": "MealItem",
+      "nanoentities": [
+        "id",
+        "productionDate",
+        "expirationDate",
+        "MealIdentificationNumberStatic"
+      ]
+    },
+    {
+      "name": "Meal",
+      "nanoentities": [
+        "id",
+        "description"
+      ]
+    },
+    {
+      "name": "Ingredient",
+      "nanoentities": [
+        "id",
+        "description"
+      ]
+    },
+    {
+      "name": "AlergicComponent",
+      "nanoentities": [
+        "id",
+        "description"
+      ]
+    },
+    {
+      "name": "MealDescriptor",
+      "nanoentities": [
+        "id",
+        "description",
+        "name"
+      ]
+    },
+    {
+      "name": "MealIdentificationNumber",
+      "nanoentities": [
+        "mealIdentificationNumberPrefix",
+        "changeMealIdentificationNumberGen",
+        "generateMealIdentificationNumber"
+      ]
+    },
+    {
+      "name": "EventLog",
+      "nanoentities": [
+        "id",
+        "description",
+        "userTypeId",
+        "action",
+        "class",
+        "date"
+      ]
+    },
+    {
+      "name": "User",
+      "nanoentities": [
+        "id",
+        "description"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "origin":"Inventory",
+      "destination":"MealItem",
+      "type":"COMPOSITION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"Ingredient",
+      "type":"COMPOSITION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"AlergicComponent",
+      "type":"COMPOSITION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"MealDescriptor",
+      "type":"COMPOSITION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"MealIdentificationNumber",
+      "type":"COMPOSITION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"Ingredient",
+      "type":"AGGREGATION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"AlergicComponent",
+      "type":"AGGREGATION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"MealDescriptor",
+      "type":"AGGREGATION"
+    },
+    {
+      "origin":"Meal",
+      "destination":"MealIdentificationNumber",
+      "type":"AGGREGATION"
+    },
+    {
+      "origin":"EventLogh",
+      "destination":"MealIdentificationNumber",
+      "type":"AGGREGATION"
+    },
+    {
+      "origin":"User",
+      "destination":"User",
+      "type":"AGGREGATION"
+    }
+  ]
+}

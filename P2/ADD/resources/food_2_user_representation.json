@@ -1,0 +1,86 @@
+{
+  "usecases": [
+    {
+      "name":"addMealItemToInventory",
+      "nanoentitiesRead": ["Meal.id"],
+      "nanoentitiesWritten":["MealItem.MealIdentificationNumberStatic"]
+    },
+    {
+      "name":"removeMealItemFromInventory",
+      "nanoentitiesRead": ["MealItem.id"],
+      "nanoentitiesWritten":[]
+    },
+    {
+      "name":"addMeal",
+      "nanoentitiesRead": [],
+      "nanoentitiesWritten":["Meal.id", "Meal.description","Meal.AlergicComponent","Meal.Ingredient", "Meal.MealDescriptor"]
+    },
+    {
+      "name":"removeMeal",
+      "nanoentitiesRead": ["Meal.id"],
+      "nanoentitiesWritten":[]
+    },
+    {
+      "name":"createMealItem",
+      "nanoentitiesRead": [],
+      "nanoentitiesWritten":["MealItem.id","MeanItem.productionDate", "MealItem.expirationDate", "MealItem.MealIdentificationNumberStatic"]
+    },
+    {
+      "name":"removeMealItem",
+      "nanoentitiesRead": ["MealItem.id"],
+      "nanoentitiesWritten":[]
+    },
+  ],
+  "compatibilities":{
+    "availabilityCriticality":
+    [
+      {
+        "characteristic":"Low",
+        "nanoentities":[
+          "Meal.description",
+          "Meal.Ingredient",
+          "User.description",
+          "MealItem.productionDate"
+        ]
+      },
+      {
+        "characteristic":"Critical",
+        "nanoentities":[
+          "Inventory.id",
+          "Inventory.description",
+          "MealItem.MealIdentificationNumberStatic",
+          "Meal.AlergicComponent"
+        ]
+      }
+    ]
+  },
+  "aggregates":[
+    {
+      "name": "InventoryAggregate",
+      "nanoentities":[
+        "Inventory.id",
+        "Inventory.description",
+        "MealItem.MealIdentificationNumberStatic",
+        "Meal.AlergicComponent"
+      ]
+    }
+  ],
+  "securityAccessGroups":[
+    {
+      "name": "adminAccess",
+      "nanoentities": [
+        "Inventory.id",
+        "Meal.id",
+        "MealItem.MealIdentificationNumberStatic"
+      ]
+    },
+    {
+      "name": "userAccess",
+      "nanoentities":[
+        "User.description",
+      ]
+    }
+  }
+],
+"predefinedServices":[]
+}
