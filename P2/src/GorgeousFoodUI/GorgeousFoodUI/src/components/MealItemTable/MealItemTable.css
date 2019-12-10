@@ -1,0 +1,22 @@
+.ItemMealComponent {
+    padding: 25px;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    width: 100%;
+    background: #FFFFFF;
+    border: black;
+}
+
+
+.button {
+    height: 40px;
+}
+
+.fieldsBox{
+    display: flex;
+    flex-direction: column;
+}
+
+
+

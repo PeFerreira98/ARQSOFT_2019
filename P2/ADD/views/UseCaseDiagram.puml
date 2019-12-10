@@ -1,0 +1,93 @@
+@startuml UseCaseDiagram
+left to right direction
+
+actor Administrator
+actor CookingTeam
+actor ServiceUsers
+actor Other
+
+usecase UC1 [
+    UC1 - Add Meal Item to Inventory
+]
+usecase UC2 [ 
+    UC2 - Remove Meal Item from Inventory 
+]
+usecase UC3 [ 
+    UC3 - Consult Available Meals
+]
+usecase UC4 [ 
+    UC4 - Consult Inventory Meal Number
+]
+usecase UC5 [ 
+    UC5 - Consult Specific Meal Location
+]
+usecase UC6 [ 
+    UC6 - Add new Meal Descriptor
+]
+usecase UC7 [ 
+    UC7 - Remove Meal Descriptor
+]
+usecase UC8 [ 
+    UC8 - Generate management report
+]
+usecase UC9 [ 
+    UC9 - Update Identification Number Generator
+]
+usecase UC10 [ 
+    UC10 - Login
+]
+usecase UC11 [ 
+    UC11 - Logout
+]
+usecase UC12 [
+    UC12 - See User Activity Log
+]
+usecase UC13 [
+    UC13 - Change App Language
+]
+usecase UC14 [
+    UC14 - Add meal to catalog
+]
+
+usecase UC15 [
+    UC15 - Remove meal to catalog
+]
+
+
+CookingTeam -- UC1
+
+CookingTeam -- UC2
+
+ServiceUsers -- UC3
+Other -- UC3
+
+CookingTeam -- UC4
+
+ServiceUsers -- UC5
+Other -- UC5
+
+CookingTeam -- UC6
+
+CookingTeam -- UC7
+
+CookingTeam -- UC8
+
+CookingTeam -- UC9
+
+CookingTeam -- UC14
+
+CookingTeam -- UC15
+
+Administrator -- UC10
+CookingTeam -- UC10
+
+Administrator -- UC11
+CookingTeam -- UC11
+
+Administrator -- UC12
+
+Administrator -- UC13
+CookingTeam -- UC13
+ServiceUsers -- UC13
+Other -- UC13
+@enduml

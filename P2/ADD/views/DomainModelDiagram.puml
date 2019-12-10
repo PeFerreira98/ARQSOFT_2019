@@ -1,0 +1,116 @@
+@startuml DomainModelDiagram
+
+package "Inventory <<Bounded Context>>" #DDDDDD {
+
+    class Inventory <<Entity>> <<Aggregate Root>> {
+        -ID : long
+        -Description : string
+    }
+
+    class MealItem <<Entity>> <<Aggregate Root>> {
+        -ID : long
+        -ProductionDate : datetime
+        -ExpirationDate : datetime
+        -MealIdentificationNumberStatic : string
+    }
+
+    object InventoryID <<Value Object>>
+
+    object MealItemMealID <<Value Object>>
+
+    MealItem -- InventoryID
+    MealItem -- MealItem.MealID
+    Inventory "0..*" -- "0..*" MealItem
+}
+
+package "Meal <<Bounded Context>>" #DDDDDD {
+
+    class Meal <<Entity>> <<Aggregate Root>> {
+        -ID : long
+        -Description : string
+        -AlergicComponents : List<AlergicComponent>
+        -Ingredients : List<Ingredient>
+        -MealDescriptors : List<MealDescriptor>
+
+        +void AddAlergicComponent()
+        +void AddIngredient()
+        +void AddMealDescriptor()
+
+        +void RemoveAlergicComponent()
+        +void RemoveIngredient()
+        +void RemoveMealDescriptor()
+    }
+
+    class Ingredient <<Entity>> {
+        -ID : long
+        -Description : string
+    }
+
+    class AlergicComponent <<Entity>> {
+        -ID : long
+        -Description : string
+    }
+
+    class MealDescriptor <<Entity>> {
+        -ID : long
+        -Description : string
+        -Name : string
+    }
+
+    object MealIdentificationNumber <<ValueObject>> {
+        -MealIdentificationNumberPrefix : string
+
+        +bool ChangeMealIdentificationNumberGen()
+        +string GenerateMealIdentificationNumber()
+    }
+
+    object Meal.MealID <<Value Object>>
+
+    Meal "0..*" -- "0..*" AlergicComponent
+    Meal "1" -- "0..*" MealDescriptor
+    Meal "0..*" -- "1..*" Ingredient
+    Meal -- MealIdentificationNumber
+    Meal -- Meal.MealID
+}
+
+Meal "1" .. "0..*" MealItem
+
+
+
+package "Log <<Bounded Context>>" #DDDDDD {
+
+    interface WriteLog
+
+    class EventLog  {
+        -ID : long
+        -Description : string
+        -UserTypeID : User
+        -Action : EventAction
+        -Class : T
+        -Date : DateTime
+
+        +WriteLog()
+    }
+
+    enum EventAction {
+        - Add
+        - Create
+        - Update
+        - Delete
+    }
+
+    class UserType {
+        -ID : long
+        -Description : string
+    }
+
+    object UserTypeID <<ValueObject>>
+
+    WriteLog <|.. EventLog
+    EventLog -- UserTypeID
+    EventLog -- EventAction
+    EventLog "0..*" -- "1" UserType
+}
+
+
+@enduml
