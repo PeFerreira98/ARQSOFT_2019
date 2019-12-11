@@ -1,7 +1,5 @@
 # Gorgeous Food Company #
-In this iteration the objective is to use the business capability pattern to identify what the business does. This decomposition helps to identify features/processes that may be converted to microservices.
-The business capability is a description of what a business does, independently of how or why.
-
+This file contains all the drivers and a resume of the decomposition patterns use for the project.
 
 ## Drivers
 P1D1. > The application to be developed must be accessible from a variety of platforms using a web browser.
@@ -38,7 +36,7 @@ P2D7. > The team is free to choose the technological stack to use in the project
 
 ---
 
-## UseCase Board
+## UseCases Board
 Actor | Use Case | Description
 --- | --- | ---
 CT | UC1 - Add Meal Item to Inventory | The cooking team/staff can create a item with a specific meal. The ingredients are associated with the meal.
@@ -62,12 +60,13 @@ CT | UC15 - Remove Meal | The cooking team/staff can remove a meal.
 ---
 
 ## Use Case Diagram
-![UseCaseDiagram](P1/ADD/views/img/UseCaseDiagram.png)
+![UseCaseDiagram](../P1/ADD/views/img/UseCaseDiagram.png)
 
 ---
 
 ## Business Capability Decomposition
-
+In this topic the objective is to use the business capability pattern to identify what the business does. This decomposition helps to identify features/processes that may be converted to microservices.
+The business capability is a description of what a business does, independently of how or why.
 After the analyses of the Company objectives and structure it were identified four capabilities. They are explicit in the following tables.
 
 ---
@@ -83,7 +82,6 @@ Artifacts | Identification of the Artifacts involved in the capability.
 
 ---
 
- | 
 --- | ---
 ID | C1
 Type | Inventory Management
@@ -94,7 +92,6 @@ Artifacts | UC1-4, P2D4
 
 ---
 
- | 
 --- | ---
 ID | C2
 Type | Meal Management
@@ -105,7 +102,6 @@ Artifacts | P2D2, P2D5
 
 ---
 
- | 
 --- | ---
 ID | C3
 Type | Descriptor Creation
@@ -116,7 +112,6 @@ Artifacts | UC6-7, UC9
 
 ---
 
- | 
 --- | ---
 ID | C4
 Type | Report Generation
@@ -127,7 +122,6 @@ Artifacts | UC8, UC12
 
 ---
 
- | 
 --- | ---
 ID | C5
 Type | POS Location
@@ -138,9 +132,72 @@ Artifacts | P2D4
 
 ---
 
+## Decomposition with Service Cutter Tool
+In this topic the objective is to continue exploring the decomposition of the system, this time with the aid of a tool.
+The explored tool is the Service Cutter (https://servicecutter.github.io/).
+
+## Service Cutter Tool ##
+This tool is a prototype that offer a 16 coupling criteria and use this criteria to propose a decomposition of a system into microservices. The tool use well-stablished artifacts of the system, like domain models and use cases.
+
+After the installation of the tool two files are needed to express the current system.
+The food_model, has the system domain, data, operations and artifacts, expressed in a json format.
+The food_2_user_representation file, expresses the use case and relations of the system entities and responsible roles.
+
+This documents are stored in [Food_model](../resources/food_model.json) and [Food_2_user_representation](../resources/food_2_user_representation.json).
+
+## Results ##
+
+The tool as two algorithms for decomposition. The Leung and Girvan-Newman algorithm.
+
+### Girvan-Newman Result ###
+
+![Girvan-Newman Result](../resources/girvan_newman.png).
+
+The Girvan-Newman algorithm suggests five microservices for the system.
+
+Service A -> for the user management;
+Service B -> for the log management;
+Service C -> for the meal management;
+Service D -> for the meal descriptor management;
+Service E -> for inventory management;
+
+
+### Leung Result ###
+
+![Leung Result](../resources/leung.png).
+
+The Leung algorithm suggests four microservices for the system.
+
+Service A -> for inventory management;
+Service B -> for the log management;
+Service C -> for the user management;
+Service D -> for the meal and descriptor management;
+
+
+## Business Subdomain Decomposition
+In this topic the objective is to decompose the system using the subdomain pattern.
+The use of the subdomain decomposition pattern will be useful to compare their results to the previous decompositions, so a better general decomposition of the system can be achieved.
+
+![Subdomain Diagram](../resources/sub_domain_diagram.png).
+
+Analyzing the current system five bounded contexts were identified. The previous image shows the entities used.
+
+1º Subdomain -> Inventory Bounded Context, that manages all the interactions involving the inventory.
+---
+2º Subdomain -> POS Bounded Context, witch is responsible for the definition of the point of sale.
+---
+3º Subdomain -> MealItem Bounded Context, that represents the MealItem operations and attributes.
+---
+4º Subdomain -> Meal Bounded Context, represents all the operations and attributes of the meal.
+---
+5º Subdomain -> Logging Bounded Context, represents the structure operations and attributes of the logging.
+
+
 ## Kanban Board
 Task | Not Addressed | Partially addressed | Addressed
 --- | --- | --- | ---
 Decomposition By Business Capability | | X
-Decomposition By Subdomain| X | |
+Decomposition By Subdomain | | | X
+Decomposition Using Service Cutter | | | X
+
 ---
