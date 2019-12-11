@@ -196,7 +196,7 @@ Analyzing the current system five bounded contexts were identified. The previous
 
 **1º Subdomain** -> Inventory Bounded Context, that manages all the interactions involving the inventory.
 
-**2º Subdomain** -> POS Bounded Context, witch is responsible for the definition of the point of sale.
+**2º Subdomain** -> User Bounded Context, witch is responsible for the definition of the user.
 
 **3º Subdomain** -> MealItem Bounded Context, that represents the MealItem operations and attributes.
 
