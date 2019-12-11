@@ -1,0 +1,25 @@
+@startuml SequenceUC2Diagram
+actor CookingTeam
+boundary GorgeousMealUI
+control MealItemController
+participant MealItemRepository
+entity MealItem
+database MealDB
+
+CookingTeam -> GorgeousMealUI : Select Meal Item and Remove
+GorgeousMealUI --> CookingTeam : Confirm?
+CookingTeam -> GorgeousMealUI : Yes
+
+GorgeousMealUI-> MealItemController : DeleteMealItem(id)
+
+MealItemController -> MealItemRepository : DisableMealItem(id)
+
+MealItemRepository -> MealDB : GetMealItem
+MealDB --> MealItemRepository : mealItem
+MealItemRepository -> MealItem : disable()
+MealItemRepository -> MealDB : SaveChanges(mealItem)
+
+MealItemRepository --> MealItemController : return success
+MealItemController --> GorgeousMealUI : return success
+GorgeousMealUI --> CookingTeam : Informs the operation's success
+@enduml

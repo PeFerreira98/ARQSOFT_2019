@@ -1,0 +1,26 @@
+@startuml DeploymentDiagram
+left to right direction
+
+node MicrosoftAzure{
+    node AppService1 {
+        component GorgeousMealUI
+    }
+
+    node AppService2 {
+        component GorgeousMealAPI
+    }
+
+    node DatabaseServer {
+        database MealDB
+    }
+}
+
+node SchoolUserDatabaseServer {
+    database UserDB
+}
+
+GorgeousMealUI -(0- GorgeousMealAPI : HTTPS
+GorgeousMealAPI -- UserDB : TCP
+GorgeousMealAPI -- MealDB : TCP
+
+@enduml

@@ -1,0 +1,16 @@
+.App{
+    background: #FFFFFF;
+}
+
+.NavBar{
+    height: 75px;
+    background-color: #282A33;
+    width: 100%;
+}
+
+.TextGorgeousFood{
+    font-size: 20px;
+    color: #FFFFFF;
+    margin: auto;
+    padding: 25px;
+}
