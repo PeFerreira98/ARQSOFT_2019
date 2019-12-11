@@ -1,5 +1,5 @@
 {
-  "usecases": [
+  "useCases": [
     {
       "name":"addMealItemToInventory",
       "nanoentitiesRead": ["Meal.id"],
@@ -29,7 +29,7 @@
       "name":"removeMealItem",
       "nanoentitiesRead": ["MealItem.id"],
       "nanoentitiesWritten":[]
-    },
+    }
   ],
   "compatibilities":{
     "availabilityCriticality":
@@ -77,10 +77,9 @@
     {
       "name": "userAccess",
       "nanoentities":[
-        "User.description",
+        "User.description"
       ]
     }
-  }
-],
-"predefinedServices":[]
+  ],
+  "predefinedServices":[]
 }
