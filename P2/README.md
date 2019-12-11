@@ -148,7 +148,7 @@ After the installation of the tool two files are needed to express the current s
 The food_model, has the system domain, data, operations and artifacts, expressed in a json format.
 The food_2_user_representation file, expresses the use case and relations of the system entities and responsible roles.
 
-This documents are stored in [Food_model](../resources/food_model.json) and [Food_2_user_representation](../resources/food_2_user_representation.json).
+This documents are stored in [Food_model](resources/food_model.json) and [Food_2_user_representation](../resources/food_2_user_representation.json).
 
 ### Results
 
@@ -156,7 +156,7 @@ The tool as two algorithms for decomposition. The Leung and Girvan-Newman algori
 
 ### Girvan-Newman Result
 
-![Girvan-NewmanResult](../resources/girvan_newman.png)
+![Girvan-NewmanResult](resources/girvan_newman.png)
 
 The Girvan-Newman algorithm suggests five microservices for the system.
 
@@ -173,7 +173,7 @@ The Girvan-Newman algorithm suggests five microservices for the system.
 
 ### Leung Result
 
-![LeungResult](/resources/leung.png)
+![LeungResult](resources/leung.png)
 
 The Leung algorithm suggests four microservices for the system.
 
