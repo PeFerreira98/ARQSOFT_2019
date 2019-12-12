@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  sql.data:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
+  gorgeousfoodapi:
+    image: ${DOCKER_REGISTRY-}gorgeousfoodapi
+    build:
+      context: .
+      dockerfile: GorgeousFoodAPI/Dockerfile
+    depends_on:
+      - sql.data
