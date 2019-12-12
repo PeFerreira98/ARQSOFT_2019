@@ -1,11 +1,19 @@
 @startuml DomainModelDiagram
+left to right direction
 
-package "Inventory <<Bounded Context>>" #DDDDDD {
+package "PointOfSale <<Bounded Context>>" #DDDDDD {
 
-    class Inventory <<Entity>> <<Aggregate Root>> {
+    class PointOfSale <<Entity>> <<Aggregate Root>> {
         -ID : long
         -Description : string
     }
+
+    object PointOfSale.PointOfSaleID <<Value Object>>
+
+    PointOfSale -- PointOfSale.PointOfSaleID
+}
+
+package "MealItem <<Bounded Context>>" #DDDDDD {
 
     class MealItem <<Entity>> <<Aggregate Root>> {
         -ID : long
@@ -14,13 +22,12 @@ package "Inventory <<Bounded Context>>" #DDDDDD {
         -MealIdentificationNumberStatic : string
     }
 
-    object InventoryID <<Value Object>>
+    object MealItem.PointOfSaleID <<Value Object>>
 
-    object MealItemMealID <<Value Object>>
+    object MealItem.MealID <<Value Object>>
 
-    MealItem -- InventoryID
+    MealItem -- MealItem.PointOfSaleID
     MealItem -- MealItem.MealID
-    Inventory "0..*" -- "0..*" MealItem
 }
 
 package "Meal <<Bounded Context>>" #DDDDDD {
@@ -73,7 +80,9 @@ package "Meal <<Bounded Context>>" #DDDDDD {
     Meal -- Meal.MealID
 }
 
-Meal "1" .. "0..*" MealItem
+PointOfSale "1" .. "0..*" MealItem
+
+MealItem "0..*" .. "1" Meal
 
 
 

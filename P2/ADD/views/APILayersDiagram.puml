@@ -17,7 +17,7 @@ package "GorgeousFoodAPI"{
 }
 
 package "ClientPC"{
-    [GorgeousFoodUI] --(API_Endpoint
+    [GorgeousFoodUI] --( API_Endpoint
 }
 
 package "DBServer"{
