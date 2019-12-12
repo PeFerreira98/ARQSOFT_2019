@@ -1,26 +1,45 @@
 @startuml DeploymentDiagram
 left to right direction
 
-node Docker{
+node ClientApps_FrontEnd{
     node AppService1Container {
         component GorgeousMealUI
     }
+}
+
+node Docker_BackEnd{
+
+    node GatewayContainer {
+        component Gateway
+    }
 
     node AppService2Container {
-        component GorgeousMealAPI
+        component MealAPI
     }
 
-    node DatabaseContainer {
+    node AppService3Container {
+        component PointOfSaleAPI
+    }
+
+    node AppService4Container {
+        component MealItemAPI
+    }
+
+    node SQLServerContainer {
         database MealDB
-    }
-
-    node SchoolUserDatabaseContainer {
-        database UserDB
+        database PointOfSaleDB
+        database MealItemDB
     }
 }
 
-GorgeousMealUI -(0- GorgeousMealAPI : HTTPS
-GorgeousMealAPI -- UserDB : TCP
-GorgeousMealAPI -- MealDB : TCP
+GorgeousMealUI -(0- Gateway : HTTPS
+
+Gateway -(0- MealAPI
+Gateway -(0- PointOfSaleAPI
+Gateway -(0- MealItemAPI
+
+MealAPI -(0- MealDB
+PointOfSaleAPI -(0- PointOfSaleDB
+MealItemAPI -(0- MealItemDB
 
 @enduml

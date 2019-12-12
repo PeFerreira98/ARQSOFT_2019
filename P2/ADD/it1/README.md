@@ -3,6 +3,7 @@
 ## What we have now
 ![componentDiagram](../img/img0.jpeg)
 
+As we can see, actually we have a simple monolithic Web Application with a single FrontEnd, a single BackEnd API and a single Database containing all the information about Meal and MealItems.
 ---
 
 ## Defining Bounded Contexts
@@ -33,3 +34,8 @@
 
 ## Reavaluate Bounded Contexts after Service Cutter study
 ![componentDiagram](../img/DomainModelDiagram_4Bounded.png)
+
+---
+
+## Third Solution after Service Cutter study
+![componentDiagram](../img/DeploymentDiagram_Docker2.png)
