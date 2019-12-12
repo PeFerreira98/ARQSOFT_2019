@@ -148,7 +148,7 @@ After the installation of the tool two files are needed to express the current s
 The food_model, has the system domain, data, operations and artifacts, expressed in a json format.
 The food_2_user_representation file, expresses the use case and relations of the system entities and responsible roles.
 
-This documents are stored in [Food_model](../resources/food_model.json) and [Food_2_user_representation](../resources/food_2_user_representation.json).
+This documents are stored in [Food_model](resources/food_model.json) and [Food_2_user_representation](../resources/food_2_user_representation.json).
 
 ### Results
 
@@ -156,7 +156,7 @@ The tool as two algorithms for decomposition. The Leung and Girvan-Newman algori
 
 ### Girvan-Newman Result
 
-![Girvan-Newman Result](../resources/girvan_newman.png)
+![Girvan-NewmanResult](resources/girvan_newman.png)
 
 The Girvan-Newman algorithm suggests five microservices for the system.
 
@@ -173,7 +173,7 @@ The Girvan-Newman algorithm suggests five microservices for the system.
 
 ### Leung Result
 
-![Leung Result](../resources/leung.png)
+![LeungResult](resources/leung.png)
 
 The Leung algorithm suggests four microservices for the system.
 
@@ -190,13 +190,13 @@ The Leung algorithm suggests four microservices for the system.
 In this topic the objective is to decompose the system using the subdomain pattern.
 The use of the subdomain decomposition pattern will be useful to compare their results to the previous decompositions, so a better general decomposition of the system can be achieved.
 
-![Subdomain Diagram](../resources/sub_domain_diagram.png)
+![Subdomain Diagram](resources/sub_domain_diagram.png)
 
 Analyzing the current system five bounded contexts were identified. The previous image shows the entities used.
 
 **1º Subdomain** -> Inventory Bounded Context, that manages all the interactions involving the inventory.
 
-**2º Subdomain** -> POS Bounded Context, witch is responsible for the definition of the point of sale.
+**2º Subdomain** -> User Bounded Context, witch is responsible for the definition of the user.
 
 **3º Subdomain** -> MealItem Bounded Context, that represents the MealItem operations and attributes.
 
