@@ -20,7 +20,8 @@ namespace GorgeousFoodAPI
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<GorgeousFoodMealContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MealDatabaseAzure")));
+            //services.AddDbContext<GorgeousFoodMealContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MealDatabaseAzure")));
+            services.AddDbContext<GorgeousFoodMealContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MealDatabaseDocker")));
 
             services.AddTransient<IMealRepository, MealRepository>();
             services.AddTransient<IMealItemRepository, MealItemRepository>();

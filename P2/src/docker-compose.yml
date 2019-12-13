@@ -1,13 +1,21 @@
 version: '3.4'
 
 services:
+
   sql.data:
     image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+      - "1433:1433"
+    environment:
+        SA_PASSWORD: "Pass@word"
+        ACCEPT_EULA: "Y"
 
   gorgeousfoodapi:
     image: ${DOCKER_REGISTRY-}gorgeousfoodapi
     build:
       context: .
       dockerfile: GorgeousFoodAPI/Dockerfile
+    ports:
+      - "38866:80"
     depends_on:
       - sql.data
