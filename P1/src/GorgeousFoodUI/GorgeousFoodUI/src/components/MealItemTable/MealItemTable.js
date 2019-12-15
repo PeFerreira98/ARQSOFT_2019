@@ -30,6 +30,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -59,8 +60,11 @@ export class MealItemTable extends Component {
             meals: [],
             mealItens: [],
             selectedMeal: '',
+            selectedPOS: '',
+            mealItemQuantity: '',
             createMealItemDialog: false,
-            selectedDate: '01/01/2019',
+            selectedDate: '01-06-2020',
+            pointsOfSale: [],
             errorText: ''
         };
         this.handleOpenCreateMealItemDialog = this.handleOpenCreateMealItemDialog.bind(this);
@@ -80,12 +84,21 @@ export class MealItemTable extends Component {
     handleCloseMealItemDialog(){
         this.setState({
             createMealItemDialog: false,
-            selectedMeal: ''
+            selectedDate: '01-06-2020',
+            selectedMeal: '',
+            selectedPOS: '',
+            mealItemQuantity: ''
         })
     }
 
-    deleteMealItens = (mealItemID) => {
-        axios.delete('https://gorgeousfoodapi.azurewebsites.net/api/mealitem/' + mealItemID).then(() => {
+    deleteMealItens = (mealItem) => {
+        let mealItemToDelete = {
+            mealId: mealItem.mealID,
+            pointOfSaleID: mealItem.pointOfSaleID,
+            expirationDate: mealItem.expirationDate,
+            productionDate: mealItem.productionDate
+        };
+        axios.delete('https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem', {data: mealItemToDelete}).then(() => {
             this.setState({
                 mealItens: this.fetchMealItens()
             });
@@ -98,7 +111,7 @@ export class MealItemTable extends Component {
     };
 
     fetchMealItens = () => {
-        axios.get('https://gorgeousfoodapi.azurewebsites.net/api/mealitem').then((response) => {
+        axios.get('https://gorgeousfoodgatewayapi.azurewebsites.net/redirect').then((response) => {
             console.log(response);
             this.setState({
                 mealItens: response.data
@@ -112,7 +125,7 @@ export class MealItemTable extends Component {
     };
 
     fetchMeals = () => {
-        axios.get('https://gorgeousfoodapi.azurewebsites.net/api/meal').then((response) => {
+        axios.get('https://gorgeousfoodmealapi.azurewebsites.net/meal').then((response) => {
             console.log(response);
             this.setState({
                 meals: response.data
@@ -125,22 +138,39 @@ export class MealItemTable extends Component {
         });
     };
 
-    createMealItem = () => {
+    fetchPointsOfSale = () => {
+        axios.get('https://gorgeousfoodpointofsaleapi.azurewebsites.net/pointofsale').then((response) => {
+            console.log(response);
+            this.setState({
+                pointsOfSale: response.data
+            });
+        }).catch((serverError) => {
+            this.setState({
+                errorText: serverError
+            });
+            console.log(this.state.errorText);
+        });
+    };
+
+    addMealItemsToPOS = () => {
         let newMealItem = {
-            expirationDate: this.state.selectedDate,
-            mealID: this.state.selectedMeal,
+            mealId: this.state.selectedMeal,
+            pointOfSaleID : this.state.selectedPOS,
+            expirationDate: new Date(this.state.selectedDate)
         };
         console.log(JSON.stringify(newMealItem));
 
-        axios.post('https://gorgeousfoodapi.azurewebsites.net/api/mealitem', newMealItem).then(() =>{
+        axios.post(`https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem/many/${this.state.mealItemQuantity}`, newMealItem).then(() =>{
            this.handleCloseMealItemDialog();
            this.fetchMealItens();
         }).catch((serverError) => {
             console.log((serverError));
             this.setState({
                 createMealItemDialog: false,
-                selectedDate: '01/01/2019',
-                selectedMeal: {mealID: ''}});
+                selectedDate: '01-06-2020',
+                selectedMeal: '',
+                selectedPOS: '',
+                mealItemQuantity: ''});
         });
     };
 
@@ -156,22 +186,38 @@ export class MealItemTable extends Component {
         });
     };
 
+    handlePointOfSaleChange = (pointOfSale) => {
+        this.setState({
+            selectedPOS: pointOfSale.target.value
+        });
+    };
+
+    handleQuantity = (qnt) => {
+        this.setState({
+            mealItemQuantity: qnt.target.value
+        })
+    };
+
     componentDidMount() {
         this.fetchMealItens();
         this.fetchMeals();
+        this.fetchPointsOfSale();
     }
 
     render() {
 
         let columns= [
-             {title: 'Meal Identification Number', field: 'mealIdentificationNumber'},
-             {title: 'Meal Description', field: 'meal.description'},
-             {title: 'Production Date', field: 'productionDate', type: 'datetime'},
-              {title: 'Expiration Date', field: 'expirationDate', type: 'datetime' },
-             ];
+            {title: 'Point of Sale', field: 'pointOfSaleDescription'},
+            {title: 'Meal Description', field: 'mealDescription'},
+            {title: 'Production Date', field: 'productionDate', type: 'datetime'},
+            {title: 'Expiration Date', field: 'expirationDate', type: 'date' },
+            {title: 'Meal Items Available', field: 'quantity'},];
 
         let mealoptions = this.state.meals.map(opt =>
             (<MenuItem key={opt.mealID} value={opt.mealID}>{opt.description}</MenuItem>));
+
+        let pointOfSaleOptions = this.state.pointsOfSale.map(opt =>
+            (<MenuItem key={opt.pointOfSaleID} value={opt.pointOfSaleID}>{opt.description}</MenuItem>));
 
         return(
             <div className="ItemMealComponent">
@@ -182,17 +228,29 @@ export class MealItemTable extends Component {
                         className="button"
                         onClick={this.handleOpenCreateMealItemDialog}
                         startIcon={<AddBox/>}>
-                        Add Meal Item
+                        Add Meal Items
                     </Button>
 
                     <Dialog open={this.state.createMealItemDialog} onClose={this.handleCloseMealItemDialog} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Add Meal Item to Inventory</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Add Meal Items to Point of Sale</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                To add a Meal Item to Inventory, please fill in the following fields.
+                                To add a Items to Point of Sale, please fill in the following fields.
                             </DialogContentText>
 
                             <div className="fieldsBox">
+
+                                <FormControl>
+                                    <InputLabel id="demo-controlled-open-select-label">Point of Sale</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        onChange={this.handlePointOfSaleChange}
+                                        value={this.state.selectedPOS}
+                                    >
+                                        {pointOfSaleOptions}
+                                    </Select>
+                                </FormControl>
 
                                 <FormControl>
                                     <InputLabel id="demo-controlled-open-select-label">Meal</InputLabel>
@@ -219,15 +277,20 @@ export class MealItemTable extends Component {
                                         }}
                                     />
                             </MuiPickersUtilsProvider>
-                            </div>
 
+                                <TextField id="standard-basic"
+                                           label="Quantity"
+                                           type="number"
+                                           onChange={this.handleQuantity}/>
+
+                            </div>
 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleCloseMealItemDialog} color="primary">
                                 Cancel
                             </Button>
-                            <Button onClick={this.createMealItem} color="primary">
+                            <Button onClick={this.addMealItemsToPOS} color="primary">
                                 Create
                             </Button>
                         </DialogActions>
@@ -248,7 +311,7 @@ export class MealItemTable extends Component {
                             new Promise(resolve => {
                                 setTimeout(() => {
                                     resolve();
-                                    this.deleteMealItens(oldData.mealItemID);
+                                    this.deleteMealItens(oldData);
                                     this.setState(this.fetchMealItens)
                                 }, 600);
                             }),

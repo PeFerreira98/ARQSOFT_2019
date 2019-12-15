@@ -65,7 +65,7 @@ export class SideBar extends Component {
 
                     <li className={this.state.selectedMealItens ? "ButtonBoxActive" : "ButtonBox"}
                         onClick={this.handleMealItensOption}>
-                        <div className="TextOptions">Inventory</div>
+                        <div className="TextOptions">Points of Sale</div>
                     </li>
 
                     <li className={this.state.selectedMeals ? "ButtonBoxActive" : "ButtonBox"}
