@@ -96,8 +96,7 @@ namespace GorgeousFood.MealItem.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            for (int i = 0; i < number; i++)
-                await _mealItemRepository.AddMealItemAsync(mealItem);
+            await _mealItemRepository.AddManyMealItemAsync(mealItem, number);
 
             return CreatedAtAction("GetMealItem", new { id = mealItem.MealItemID }, mealItem);
         }
@@ -110,6 +109,23 @@ namespace GorgeousFood.MealItem.API.Controllers
                 return BadRequest(ModelState);
 
             Models.MealItem mealItem = await _mealItemRepository.GetMealItemByIDAsync(id);
+
+            if (mealItem == null)
+                return NotFound();
+
+            await _mealItemRepository.DisableMealItemAsync(mealItem);
+
+            return Ok(mealItem);
+        }
+
+        // DELETE: MealItem
+        [HttpDelete]
+        public async Task<IActionResult> DeleteGenericMealItem([FromBody] MealItemToDeleteInputDTO inputDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Models.MealItem mealItem = await _mealItemRepository.GetNextAvailableMealItemFromBatch(inputDTO.ProductionDate, inputDTO.ExpirationDate, inputDTO.MealID, inputDTO.PointOfSaleID);
 
             if (mealItem == null)
                 return NotFound();

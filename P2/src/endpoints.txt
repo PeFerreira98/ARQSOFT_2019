@@ -1,0 +1,10 @@
+GET: https://gorgeousfoodgatewayapi.azurewebsites.net/redirect
+
+GET/POST/PUT/DELETE: https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem
+GET: https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem/exists/5
+POST: https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem/many/5
+
+GET/POST/PUT/DELETE: https://gorgeousfoodmealapi.azurewebsites.net/meal
+
+GET/POST/PUT/DELETE: https://gorgeousfoodpointofsalemapi.azurewebsites.net/pointofsale
+

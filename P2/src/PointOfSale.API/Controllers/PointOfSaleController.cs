@@ -30,6 +30,18 @@ namespace GorgeousFood.PointOfSale.API.Controllers
             return pointOfSale == null ? NotFound() : (IActionResult)Ok(pointOfSale);
         }
 
+        // GET: PointOfSale/5/Description
+        [HttpGet("{id}/description")]
+        public async Task<IActionResult> GetPointOfSaleDescription([FromRoute] long id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Models.PointOfSale pointOfSale = await _pointOfSaleRepository.GetPointOfSaleByIDAsync(id);
+
+            return pointOfSale == null ? NotFound() : (IActionResult)Ok(pointOfSale.Description);
+        }
+
         // GET: PointOfSale/exists/5
         [HttpGet("exists/{id}")]
         public bool PointOfSaleExists([FromRoute] long id) => _pointOfSaleRepository.PointOfSaleExists(id);
