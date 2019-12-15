@@ -72,6 +72,19 @@ namespace GorgeousFood.MealItem.API.Controllers
             return CreatedAtAction("GetMealItem", new { id = mealItem.MealItemID }, mealItem);
         }
 
+        // POST: MealItem/many/{number}
+        [HttpPost("many/{number}")]
+        public async Task<IActionResult> PostMealItemMany([FromRoute] long number, [FromBody] Models.MealItem mealItem)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            for(int i=0; i<number; i++)
+                await _mealItemRepository.AddMealItemAsync(mealItem);
+
+            return CreatedAtAction("GetMealItem", new { id = mealItem.MealItemID }, mealItem);
+        }
+
         // DELETE: MealItem/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMealItem([FromRoute] long id)

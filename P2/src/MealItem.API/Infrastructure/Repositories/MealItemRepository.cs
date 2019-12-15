@@ -40,6 +40,12 @@ namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddManyMealItemAsync(long number, Models.MealItem mealItem)
+        {
+            for (int i = 0; i < number; i++)
+                await AddMealItemAsync(mealItem);
+        }
+
         public async Task DeleteMealItemAsync(Models.MealItem mealItem)
         {
             _context.MealItem.Remove(mealItem);
