@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GorgeousFood.MealItem.API.DTOs;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
@@ -7,6 +8,9 @@ namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
     {
         IEnumerable<Models.MealItem> GetAllMealItem();
         IEnumerable<Models.MealItem> GetAllAvailableMealItem();
+        IEnumerable<GroupedMealItem> GetGroupedMealItems();
+        IEnumerable<GroupedMealItem> Stuff();
+        long GetGroupedMealItemQuantity(GroupedMealItem groupedMealItem);
         Task<Models.MealItem> GetMealItemByIDAsync(long id);
         Task EditMealItemAsync(Models.MealItem mealItem);
         Task AddMealItemAsync(Models.MealItem mealItem);

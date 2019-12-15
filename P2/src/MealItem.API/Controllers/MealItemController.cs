@@ -1,4 +1,5 @@
-﻿using GorgeousFood.MealItem.API.Infrastructure.Repositories;
+﻿using GorgeousFood.MealItem.API.DTOs;
+using GorgeousFood.MealItem.API.Infrastructure.Repositories;
 using GorgeousFood.MealItem.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,22 @@ namespace GorgeousFood.MealItem.API.Controllers
             Models.MealItem mealItem = await _mealItemRepository.GetMealItemByIDAsync(id);
 
             return mealItem == null ? NotFound() : (IActionResult)Ok(mealItem);
+        }
+
+        // GET: MealItem/grouped
+        [HttpGet("grouped")]
+        public IEnumerable<GroupedMealItem> GetGroupedMealItem()
+        {
+            //var mealitems = _mealItemRepository.GetGroupedMealItems();
+
+            //var groupList = new List<(GroupedMealItem, long)>();
+
+            //foreach (var item in mealitems)
+            //    groupList.Add((item, _mealItemRepository.GetGroupedMealItemQuantity(item)));
+
+            //return groupList;
+
+            return _mealItemRepository.Stuff();
         }
 
         // GET: MealItem/exists/5
@@ -79,7 +96,7 @@ namespace GorgeousFood.MealItem.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            for(int i=0; i<number; i++)
+            for (int i = 0; i < number; i++)
                 await _mealItemRepository.AddMealItemAsync(mealItem);
 
             return CreatedAtAction("GetMealItem", new { id = mealItem.MealItemID }, mealItem);
