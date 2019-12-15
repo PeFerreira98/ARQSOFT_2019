@@ -1,3 +1,4 @@
+using GorgeousFood.MealItem.API.DTOs;
 using GorgeousFood.MealItem.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,6 +18,29 @@ namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
         public IEnumerable<Models.MealItem> GetAllMealItem() => _context.MealItem;
 
         public IEnumerable<Models.MealItem> GetAllAvailableMealItem() => _context.MealItem.Where(x => x.AvailableStatus);
+
+        public IEnumerable<long> GetAllAvailableMealIDs() => _context.MealItem.Where(x => x.AvailableStatus).Select(x => x.MealID).Distinct();
+
+        public IEnumerable<GroupedMealItem> GetGroupedMealItems() =>
+            _context.MealItem
+                .Where(x => x.AvailableStatus).OrderBy(x => x.PointOfSaleID).ThenBy(x => x.MealID).ThenBy(x => x.ProductionDate).ThenBy(x => x.ExpirationDate)
+                .Select(x => new GroupedMealItem(x.PointOfSaleID, x.MealID, x.ProductionDate, x.ExpirationDate)).Distinct();
+
+        public long GetGroupedMealItemQuantity(GroupedMealItem groupedMealItem) =>
+            _context.MealItem
+                .Where(x => x.AvailableStatus && x.PointOfSaleID == groupedMealItem.PointOfSaleID && x.MealID == groupedMealItem.MealID && x.ProductionDate == groupedMealItem.ProductionDate && x.ExpirationDate == groupedMealItem.ExpirationDate)
+                .Count();
+
+        public IEnumerable<GroupedMealItem> Stuff()
+        {
+            var stuff = _context.MealItem
+                .Where(x => x.AvailableStatus).OrderBy(x => x.PointOfSaleID).ThenBy(x => x.MealID).ThenBy(x => x.ProductionDate).ThenBy(x => x.ExpirationDate)
+                ;//.Select(x => new GroupedMealItem(x.PointOfSaleID, x.MealID, x.ProductionDate, x.ExpirationDate));
+
+            var s2 = stuff.GroupBy(x => new GroupedMealItem(x.PointOfSaleID, x.MealID, x.ProductionDate, x.ExpirationDate)).Select(g => new GroupedMealItem(g.Key.PointOfSaleID, g.Key.MealID, g.Key.ProductionDate, g.Key.ExpirationDate, g.Count()));
+
+            return s2;
+        }
 
         public async Task<Models.MealItem> GetMealItemByIDAsync(long id) => await _context.MealItem.FindAsync(id);
 
@@ -38,6 +62,12 @@ namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
                 return;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AddManyMealItemAsync(long number, Models.MealItem mealItem)
+        {
+            for (int i = 0; i < number; i++)
+                await AddMealItemAsync(mealItem);
         }
 
         public async Task DeleteMealItemAsync(Models.MealItem mealItem)

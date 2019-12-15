@@ -32,6 +32,19 @@ namespace GorgeousFood.Meal.API.Controllers
             return meal == null ? NotFound() : (IActionResult)Ok(meal);
         }
 
+
+        // GET: /Meal/5/Description
+        [HttpGet("{id}/Description")]
+        public async Task<IActionResult> GetMealDescription([FromRoute] long id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            Models.Meal meal = await _mealRepository.GetMealByIDAsync(id);
+
+            return meal == null ? NotFound() : (IActionResult)Ok(meal.Description);
+        }
+
         // PUT: /Meal/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMeal([FromRoute] long id, [FromBody] Models.Meal meal)
