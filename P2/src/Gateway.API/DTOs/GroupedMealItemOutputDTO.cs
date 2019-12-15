@@ -9,6 +9,7 @@ namespace GorgeousFood.Gateway.API.DTOs
     {
 
         public long PointOfSaleID { get; set; }
+        public string PointOfSaleDescription { get; set; }
         public long MealID { get; set; }
         public string MealDescription { get; set; }
         public DateTime ProductionDate { get; set; }
@@ -19,9 +20,10 @@ namespace GorgeousFood.Gateway.API.DTOs
         {
         }
 
-        public GroupedMealItemOutputDTO(long pointOfSaleID, long mealID, string mealDescription, DateTime productionDate, DateTime expirationDate, int quantity)
+        public GroupedMealItemOutputDTO(long pointOfSaleID, string pointOfSaleDescription, long mealID, string mealDescription, DateTime productionDate, DateTime expirationDate, int quantity)
         {
             PointOfSaleID = pointOfSaleID;
+            PointOfSaleDescription = pointOfSaleDescription;
             MealID = mealID;
             MealDescription = mealDescription;
             ProductionDate = productionDate;

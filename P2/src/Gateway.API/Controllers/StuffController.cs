@@ -18,6 +18,7 @@ namespace GorgeousFood.Gateway.API.Controllers
     {
         private string mealItemAPI = "https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem";
         private string mealAPI = "https://gorgeousfoodmealapi.azurewebsites.net/meal";
+        private string pointofsaleAPI = "https://gorgeousfoodpointofsaleapi.azurewebsites.net/pointofsale";
 
         // GET: Stuff
         public async Task<IActionResult> GetGroupedMealItems()
@@ -51,7 +52,17 @@ namespace GorgeousFood.Gateway.API.Controllers
 
                     var s2 = JsonConvert.DeserializeObject<string>(content2);
 
-                    groupedMealList.Add(new GroupedMealItemOutputDTO(item.PointOfSaleID, item.MealID, s2, item.ProductionDate, item.ExpirationDate, item.Quantity));
+
+
+                    HttpResponseMessage response3 = await httpClient.GetAsync(pointofsaleAPI + "/" + item.PointOfSaleID + "/description");
+                    string content3 = await response3.Content.ReadAsStringAsync();
+
+                    if (string.IsNullOrWhiteSpace(content3))
+                        throw new Exception("Response contained empty body...");
+
+                    var s3 = JsonConvert.DeserializeObject<string>(content3);
+
+                    groupedMealList.Add(new GroupedMealItemOutputDTO(item.PointOfSaleID, s3, item.MealID, s2, item.ProductionDate, item.ExpirationDate, item.Quantity));
                 }
 
                 return (IActionResult)Ok(groupedMealList);

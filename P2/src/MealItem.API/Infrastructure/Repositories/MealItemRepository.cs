@@ -21,6 +21,11 @@ namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
 
         public IEnumerable<long> GetAllAvailableMealIDs() => _context.MealItem.Where(x => x.AvailableStatus).Select(x => x.MealID).Distinct();
 
+        public Task<Models.MealItem> GetNextAvailableMealItemFromBatch(DateTime pDate, DateTime expDate, long mealID, long pointOfSaleID) => 
+            _context.MealItem
+                .Where(x => x.AvailableStatus && x.ProductionDate == pDate && x.ExpirationDate == expDate && x.MealID == mealID && x.PointOfSaleID == pointOfSaleID)
+                .FirstOrDefaultAsync();
+
         public IEnumerable<GroupedMealItem> GetGroupedMealItems() =>
             _context.MealItem
                 .Where(x => x.AvailableStatus).OrderBy(x => x.PointOfSaleID).ThenBy(x => x.MealID).ThenBy(x => x.ProductionDate).ThenBy(x => x.ExpirationDate)
@@ -62,6 +67,25 @@ namespace GorgeousFood.MealItem.API.Infrastructure.Repositories
                 return;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task AddManyMealItemAsync(Models.MealItem mealItem, long number)
+        {
+            for (int i = 0; i < number; i++)
+            {
+                var s1 = new Models.MealItem(mealItem);
+
+                _context.MealItem.Add(s1);
+                await _context.SaveChangesAsync();
+
+                //Instantiate GeneratedID
+                var savedMealItem = await _context.MealItem.Where(x => x.MealItemID == s1.MealItemID).SingleOrDefaultAsync();
+
+                if (savedMealItem == null)
+                    return;
+
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task AddManyMealItemAsync(long number, Models.MealItem mealItem)

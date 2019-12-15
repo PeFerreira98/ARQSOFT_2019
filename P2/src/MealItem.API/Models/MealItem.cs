@@ -14,8 +14,16 @@ namespace GorgeousFood.MealItem.API.Models
 
         public MealItem()
         {
-            ProductionDate = DateTime.Now;
+            ProductionDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            MealIdentificationNumber = "fckThis";
             AvailableStatus = true;
+        }
+
+        public MealItem(MealItem mealitem) : this()
+        {
+            ExpirationDate = mealitem.ExpirationDate;
+            MealID = mealitem.MealID;
+            PointOfSaleID = mealitem.PointOfSaleID;
         }
 
         public void DisableMealItem() => AvailableStatus = false;
