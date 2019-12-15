@@ -1,4 +1,24 @@
-/****** Object:  Table [dbo].[Meal]    Script Date: 08/11/2019 17:20:45 ******/
+USE master;
+GO
+
+IF DB_ID (N'mealDB') IS NOT NULL
+DROP DATABASE mealDB;
+GO
+CREATE DATABASE mealDB;
+GO
+
+IF DB_ID (N'pointOfSaleDB') IS NOT NULL
+DROP DATABASE pointOfSaleDB;
+GO
+CREATE DATABASE pointOfSaleDB;
+GO
+
+IF DB_ID (N'mealItemDB') IS NOT NULL
+DROP DATABASE mealItemDB;
+GO
+CREATE DATABASE mealItemDB;
+GO
+
 SET ANSI_NULLS ON
 GO
 
