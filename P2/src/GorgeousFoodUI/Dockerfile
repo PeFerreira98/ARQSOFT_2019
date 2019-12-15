@@ -1,16 +1,19 @@
 # base image
 FROM node:12.2.0-alpine
 
-# set working directory
+
+# Create a work directory and copy over our dependency manifest files.
+RUN mkdir /app
 WORKDIR /app
+COPY /src /app/src
+COPY ["package.json", "package-lock.json*", "./"]
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+# If you're using yarn:
+#  yarn build
+RUN npm install --production --silent && mv node_modules ../
 
-# install and cache app dependencies
-COPY package.json /app/package.json
-RUN npm install --silent
-RUN npm install react-scripts@3.0.1 -g --silent
+# Expose PORT 3000 on our virtual machine so we can run our server
+EXPOSE 3000
 
 # start app
 CMD ["npm", "start"]

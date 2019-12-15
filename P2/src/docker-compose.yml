@@ -21,16 +21,14 @@ services:
       - sql.data
 
   gorgeousfoodui:
-    container_name: sample
     build:
       context: .
       dockerfile: GorgeousFoodUI/Dockerfile
     volumes:
       - '.:/app'
-      - '/app/node_modules'
     ports:
       - '38867:3000'
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
     depends_on: 
       - gorgeousfoodapi
