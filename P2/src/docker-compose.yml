@@ -17,8 +17,8 @@ services:
       dockerfile: Meal.API/Dockerfile
     ports:
       - "38867:80"
-    depends_on:
-      - sql.data
+    # depends_on:
+    #   - sql.data
 
   pointofsale.api:
     image: gorgeousfood/pointofsale.api

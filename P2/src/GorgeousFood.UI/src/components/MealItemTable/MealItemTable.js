@@ -98,7 +98,7 @@ export class MealItemTable extends Component {
             expirationDate: mealItem.expirationDate,
             productionDate: mealItem.productionDate
         };
-        axios.delete('https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem', {data: mealItemToDelete}).then(() => {
+        axios.delete('http://localhost:38869/mealitem', {data: mealItemToDelete}).then(() => {
             this.setState({
                 mealItens: this.fetchMealItens()
             });
@@ -111,7 +111,7 @@ export class MealItemTable extends Component {
     };
 
     fetchMealItens = () => {
-        axios.get('https://gorgeousfoodgatewayapi.azurewebsites.net/redirect').then((response) => {
+        axios.get('http://localhost:38870/redirect').then((response) => {
             console.log(response);
             this.setState({
                 mealItens: response.data
@@ -125,7 +125,7 @@ export class MealItemTable extends Component {
     };
 
     fetchMeals = () => {
-        axios.get('https://gorgeousfoodmealapi.azurewebsites.net/meal').then((response) => {
+        axios.get('http://localhost:38867/meal').then((response) => {
             console.log(response);
             this.setState({
                 meals: response.data
@@ -139,7 +139,7 @@ export class MealItemTable extends Component {
     };
 
     fetchPointsOfSale = () => {
-        axios.get('https://gorgeousfoodpointofsaleapi.azurewebsites.net/pointofsale').then((response) => {
+        axios.get('http://localhost:38868/pointofsale').then((response) => {
             console.log(response);
             this.setState({
                 pointsOfSale: response.data
@@ -160,7 +160,7 @@ export class MealItemTable extends Component {
         };
         console.log(JSON.stringify(newMealItem));
 
-        axios.post(`https://gorgeousfoodmealitemapi.azurewebsites.net/mealitem/many/${this.state.mealItemQuantity}`, newMealItem).then(() =>{
+        axios.post(`http://localhost:38869/mealitem/many/${this.state.mealItemQuantity}`, newMealItem).then(() =>{
            this.handleCloseMealItemDialog();
            this.fetchMealItens();
         }).catch((serverError) => {

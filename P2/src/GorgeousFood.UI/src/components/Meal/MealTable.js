@@ -68,7 +68,7 @@ export class MealTable extends Component{
     }
 
     fetchMeals = () => {
-        axios.get('https://gorgeousfoodmealapi.azurewebsites.net/meal').then((response) => {
+        axios.get('http://localhost:38867/meal').then((response) => {
             this.setState({
                 meals: response.data
             });
