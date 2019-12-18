@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["GorgeousFood.MealItem.API/GorgeousFood.MealItem.API.csproj", "GorgeousFood.MealItem.API/"]
-RUN dotnet restore "GorgeousFood.MealItem.API/GorgeousFood.MealItem.API.csproj"
+COPY ["MealItem.API/MealItem.API.csproj", "MealItem.API/"]
+RUN dotnet restore "MealItem.API/MealItem.API.csproj"
 COPY . .
-WORKDIR "/src/GorgeousFood.MealItem.API"
-RUN dotnet build "GorgeousFood.MealItem.API.csproj" -c Release -o /app/build
+WORKDIR "/src/MealItem.API"
+RUN dotnet build "MealItem.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "GorgeousFood.MealItem.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "MealItem.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GorgeousFood.MealItem.API.dll"]
+ENTRYPOINT ["dotnet", "MealItem.API.dll"]

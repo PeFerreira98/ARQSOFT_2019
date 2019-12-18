@@ -1,34 +1,67 @@
-version: '3.4'
+version: '3.7'
 
 services:
 
-  sql.data:
-    image: mcr.microsoft.com/mssql/server:2017-latest
-    ports:
-      - "1433:1433"
-    environment:
-        SA_PASSWORD: "Pass@word"
-        ACCEPT_EULA: "Y"
+  # sql.data:
+  #   image: mcr.microsoft.com/mssql/server:2017-latest
+  #   ports:
+  #     - "1433:1433"
+  #   environment:
+  #       SA_PASSWORD: "Pass@word"
+  #       ACCEPT_EULA: "Y"
 
-  gorgeousfoodapi:
-    image: ${DOCKER_REGISTRY-}gorgeousfoodapi
+  meal.api:
+    image: gorgeousfood/meal.api
     build:
       context: .
-      dockerfile: GorgeousFoodAPI/Dockerfile
+      dockerfile: Meal.API/Dockerfile
     ports:
-      - "38866:80"
+      - "38867:80"
     depends_on:
       - sql.data
 
-  gorgeousfoodui:
+  pointofsale.api:
+    image: gorgeousfood/pointofsale.api
     build:
       context: .
-      dockerfile: GorgeousFoodUI/Dockerfile
-    volumes:
-      - '.:/app'
+      dockerfile: PointOfSale.API/Dockerfile
     ports:
-      - '38867:3000'
-    environment:
-      - NODE_ENV=production
+      - "38868:80"
+    # depends_on:
+    #   - sql.data
+
+  mealitem.api:
+    image: gorgeousfood/mealitem.api
+    build:
+      context: .
+      dockerfile: MealItem.API/Dockerfile
+    ports:
+      - "38869:80"
+    depends_on:
+      # - sql.data
+      - meal.api
+      - pointofsale.api
+
+  gateway.api:
+    image: gorgeousfood/gateway.api
+    build:
+      context: .
+      dockerfile: Gateway.API/Dockerfile
+    ports:
+      - "38870:80"
+    depends_on:
+      - mealitem.api
+      - meal.api
+      - pointofsale.api
+
+  gorgeousfood.ui:
+    image: gorgeousfood/gorgeousfood.ui
+    build:
+      context: ./GorgeousFood.UI
+      dockerfile: ./Dockerfile
+    # volumes:
+    #   - '.:/app'
+    ports:
+      - '38866:3000'
     depends_on: 
-      - gorgeousfoodapi
+      - gateway.api
